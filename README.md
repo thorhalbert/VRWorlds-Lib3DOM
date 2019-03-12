@@ -1,0 +1,2 @@
+# VRWorlds-Lib3DOM
+BrowserSide and Serverside Libraries for the 3DOM (3D Object Model) for the VR Browser.   These are intended to be there interface between the sandboxed entity code and the browser itself.  It is somewhat like a browser DOM, but there's one for each entity.   Also, There's a World and Avatar version of the 3DOM which is extended to handle the needs of designing and operating these pieces.
