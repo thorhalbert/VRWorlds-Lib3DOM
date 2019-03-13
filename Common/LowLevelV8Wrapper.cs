@@ -9,10 +9,13 @@ namespace Common
     class LowLevelV8Wrapper : IDisposable
     {
         V8ScriptEngine engine = null;
+        Dictionary<string, V8Script> methodCache = new Dictionary<string, V8Script>();
 
         public LowLevelV8Wrapper()
         {
-            engine = new V8ScriptEngine();
+            engine = new V8ScriptEngine("name", 
+                V8ScriptEngineFlags.DisableGlobalMembers | V8ScriptEngineFlags.EnableDebugging,
+                8080);     // We need to pass in a name, and a unique debug port
         }
 
         #region IDisposable Support
