@@ -8,10 +8,11 @@ namespace Common
    
     class LowLevelV8Wrapper : IDisposable
     {
+        V8ScriptEngine engine = null;
 
         public LowLevelV8Wrapper()
         {
-          
+            engine = new V8ScriptEngine();
         }
 
         #region IDisposable Support
@@ -24,6 +25,10 @@ namespace Common
                 if (disposing)
                 {
                     // TODO: dispose managed state (managed objects).
+
+                    if (engine != null)
+                        engine.Dispose();
+                    engine = null;
                 }
 
                 // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
