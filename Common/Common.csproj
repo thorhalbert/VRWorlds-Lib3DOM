@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="ClearScript.Installer" Version="5.4.1.23392" />
+    <PackageReference Include="idunno.Authentication.Certificate" Version="2.1.1" />
     <PackageReference Include="System.Data.SQLite" Version="1.0.110" />
   </ItemGroup>
 

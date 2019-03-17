@@ -41,11 +41,11 @@ However you can't lose things that are Possesions (I'm not sure you can't leave 
 # System is not built using Gaming or Movie VR tropes (which are intended to increase drama/tension)
 
 * No, you can't die.  Your Avatar is yours.
-* You can be in more than one world at a time (though we're not implementing that initially).   And you're only really awake in one world at time (like tabs in your web-browser--though maybe someday your Avatar can be run by an AI for you).
+* You can be in more than one world at a time (though we're not implementing that initially).   And you're only really awake in one world at time (like tabs in your web-browser--though maybe someday your Avatar can be run by an Agent AI for you).
 * You don't have a limit to what you can carry.
 * Things that are yours can't be lost.
 
-Now, some of these game-like things might exist inside a world.   Things you pick up inside a world are not necessarily yours and you can't always take them with you or they may have a carrying capacity.
+Now, some of these game-like trope-rules might exist inside a given world.   Things you pick up inside a world are not necessarily yours and you can't always take them with you or you may have a carrying capacity for things from within the world.  Also you may not be permitted to use your possessions in some worlds.  Kudos only operate in worlds that recognize that type of Kudo.
 
 You can have levels and skills and these are affected by the rules of a game world.   A world might kick you out or zero your level/health, but it can't kill you.  Likely it will kick you out (likely temporarily), or it will "respawn" you.
 
@@ -53,3 +53,34 @@ You can have levels and skills and these are affected by the rules of a game wor
 
 
 Looking very hard at: https://github.com/ory - Might use just for OAUTH2, or maybe even for a lot more of the Kudo Server
+
+
+
+# Kudo functions
+
+## Authenticate Self
+
+Prove that the Kudo Server is who it says it is, since we have no heirarchy of trust.  A Kudo server's value only exists because of it's reputation.
+
+It seems like, to me, that the identity over time of the Kudo server is basically the hash of it's public key.  
+The server should be able to sign something to prove that it owns that public key.
+
+Actually I think this may simply be enough to have them encrypt a challenge, which would be decrypted by the public key.
+
+## Authenticate Avatar Server and log-in an Avatar
+
+Server authentication might not be any effort.  If our server has a cert that is signed by our Kudo CA, then we might be able to trust that it is who it says it is.
+
+## Authenticate World Server and log in Avatar via a Pass
+## Validate a Kudo - permit maintenance of Kudos (with possible Revocation)
+## Authenticate an Entity Server
+
+## Act as CA for itself, Avatars and their Aspects, Worlds, and Entity Servers
+
+
+
+## Kudo-like objects
+### Passes (permission to enter parts of a world) - this is basically Authorization
+### Grants - permission to borrow an Entity Instance (take it out of a world and monopolize it)
+### Deeds - permanent ownership of an Entity Instance
+
