@@ -84,3 +84,23 @@ Server authentication might not be any effort.  If our server has a cert that is
 ### Grants - permission to borrow an Entity Instance (take it out of a world and monopolize it)
 ### Deeds - permanent ownership of an Entity Instance
 
+
+# Certificates
+
+* The Main CA Cert - Each Kudo Domain has One
+
+** Signs the Signing certs which are monthly
+
+*** Signs the SSL Certs for every web service
+*** Each Avatar and Aspect has one (these might be delegated with an Avatar Signing Cert)
+*** Code signing Certs (similarly might be delegated to a non-Kudo server)
+
+I'm thinking that maybe Kudo's are special certificates?   They can have duration.
+I suspect we need a signer for each type of Kudo.   The signer is delegated to the group or individual Avatar.
+Though Passes, Grants, and Deeds are rather special.  We need to boil these all down to their classes.
+
+At the end of the day--passes, grants and deeds--are really the same thing.   They are a permission/authorization of some given duration (or infinite duration).
+
+I thought of another angle.  Groups who get together to give the "kudo".  So, this can operate as an election or a consensus (consensus is backwards from an election, where zero or more vetos cancels the decision).  After the decision point, the group can then grant the cert.
+
+It would be nice if we could find one of the extended oids to use as a json blob.   Or we can figure out the extended oids to use them for the intended purpose.
