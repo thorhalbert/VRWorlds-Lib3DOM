@@ -30,8 +30,7 @@ We might keep more than one TOTP key - for 24 hours, 5 days, 30 days, to lessen 
 
 
 
-*   These TOTP tokens need a better name
-*   EntityLet's need to be named properly.  These are the suite of browser-side code-behind elements that represent Avatars, Entities and Worlds.   How about **Emissary**.
+*   These TOTP tokens need a better name - they may not actually be TOTP type tokens, they may be simple signed tickets with an expiration time.
 *   Might want a better name than 'browser'
 *   Also the whole damn project needs a better name.  VR-Worlds isn't too bad, but it isn't good either.
 

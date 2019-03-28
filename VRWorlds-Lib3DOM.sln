@@ -21,11 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kudo_Vouch", "KudoMicroserv
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Architecture Docs", "Architecture Docs", "{4C393B8E-DBE4-46B5-AA30-4A97F011F9FF}"
 	ProjectSection(SolutionItems) = preProject
-		Common\Browser.md = Common\Browser.md
 		ArchitectureDocs\Browser.md = ArchitectureDocs\Browser.md
-		High Level Use-Cases.md = High Level Use-Cases.md
 		ArchitectureDocs\High Level Use-Cases.md = ArchitectureDocs\High Level Use-Cases.md
-		Common\KudoProtocol.md = Common\KudoProtocol.md
 		ArchitectureDocs\KudoProtocol.md = ArchitectureDocs\KudoProtocol.md
 	EndProjectSection
 EndProject
