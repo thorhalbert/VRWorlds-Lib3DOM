@@ -31,7 +31,7 @@ We might keep more than one TOTP key - for 24 hours, 5 days, 30 days, to lessen 
 
 
 *   These TOTP tokens need a better name
-*   EntityLet's need to be named properly.  These are the suite of browser-side code-behind elements that represent Avatars, Entities and Worlds.
+*   EntityLet's need to be named properly.  These are the suite of browser-side code-behind elements that represent Avatars, Entities and Worlds.   How about **Emissary**.
 *   Might want a better name than 'browser'
 *   Also the whole damn project needs a better name.  VR-Worlds isn't too bad, but it isn't good either.
 
@@ -60,7 +60,7 @@ All communications with the servers will require the TOTP key, possibly in the U
 
 Get a manifest for the Avatar and everything it's carrying (current active personal inventory)
 
-Start loading the 'EntityLets' for the Avatar and the Entities (unless they're cached).
+Start loading the Emissary Modules for the Avatar and the Entities (unless they're cached).
 
 These get loaded into the **_Avatar _**and the**_ Current Inventory_** V8 instances.
 
