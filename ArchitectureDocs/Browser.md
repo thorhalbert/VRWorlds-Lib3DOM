@@ -8,3 +8,5 @@ It also provides us with a sha256 checksum which has been signed by the appropri
 This directory basically gets logically chroot'ed as the working directory for the Emissary.   If a new version of the Emissary comes along, the new one is downloaded and a transition method is called and the old one is removed.   This allows the entity code to be updated continuously and on the fly.
 
 This directory also has the startup javascript and webassembly that will be loaded for this entity.  These will be compiled in v8 and the "boot" procedure will be started.  If there is mesh data and textures these can then be loaded.    If the entity is no longer required for a scene (or the user changes scenes), then it will timeout and be removed.    Ultimately State is the entity servers responsibility.
+
+Browser will ultimately need an interface to be able to expose the debugging ports for emissaries.   This will also tie into how wasm ultimately will be debugged, and if you are using minified emisary code (which in production you should, though ultimately this should all be wasm).

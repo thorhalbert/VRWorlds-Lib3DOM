@@ -17,18 +17,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Misc", "Misc", "{85B9C9F0-D
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "KudoMicroservices", "KudoMicroservices", "{BD2280FE-F20E-4E55-8001-BA56DA5CA259}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kudo_Vouch", "KudoMicroservices\Kudo_Vouch\Kudo_Vouch.csproj", "{7884BD6C-5DD9-4004-8B2A-1D189F7E194F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kudo_Vouch", "KudoMicroservices\Kudo_Vouch\Kudo_Vouch.csproj", "{7884BD6C-5DD9-4004-8B2A-1D189F7E194F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Architecture Docs", "Architecture Docs", "{4C393B8E-DBE4-46B5-AA30-4A97F011F9FF}"
 	ProjectSection(SolutionItems) = preProject
+		Avatars.md = Avatars.md
 		ArchitectureDocs\Browser.md = ArchitectureDocs\Browser.md
+		Emissary Marshalling Process.md = Emissary Marshalling Process.md
 		ArchitectureDocs\High Level Use-Cases.md = ArchitectureDocs\High Level Use-Cases.md
 		ArchitectureDocs\KudoProtocol.md = ArchitectureDocs\KudoProtocol.md
+		Research.md = Research.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common Microservices", "Common Microservices", "{93CDE9A0-2A5E-4FBA-BD8C-7BD808BD3BD0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarshallEmissary", "MarshallEmissary\MarshallEmissary.csproj", "{DA721731-C522-46EA-8245-CF9D086A1EDA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MarshallEmissary", "MarshallEmissary\MarshallEmissary.csproj", "{DA721731-C522-46EA-8245-CF9D086A1EDA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
