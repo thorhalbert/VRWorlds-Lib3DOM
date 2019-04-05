@@ -30,6 +30,8 @@ There are two and possibily three parts to this.
 Files:
 
 *  Manifest.json
+*  CERT.CA - cert which signed the manifest
+*  Manifest.pem - signature of manifest?  Not sure if this it's final form
 *  _code/  (directory)
 ** startup.js  - start script (maybe optionally this can be startup.wasm)
 *  _payload/  (directory)
@@ -38,6 +40,9 @@ Any other javascript and wasm will be put in the _code directory.
 
 The **_payload** directory will essentially be mounted/chroot'ed to the root of the filesystem that is visable to the Emissary (note it can't see its own code).  At this time I see no valid use-case that requires writable access to the disk.   State for the Emissary should always exist on the server side.   The only thing I can think of that would legitmately be there would be for caches.  
 And so, I think I'd rather have a more formal caching API to controls that stuff.
+
+So, reading about APK and JAR files internals today and I think I should do something similar.   The manifest file would contain the hashes of all the files and this would get signed.  The signature and the CERT it was signed with (public key) would get added to the zip file.  The zip file itself isn't signed.   
+I think this would give more control (which is why the Android and Java people do it this way--I was wondering if they did something special to sign the file).
 
 
 Researching WASM compilers, and the pickings are pretty thin.  I really wanted to start with C# (and I may try to get mono-wasm to work), but may end up with Go or Rust Emissaries.
