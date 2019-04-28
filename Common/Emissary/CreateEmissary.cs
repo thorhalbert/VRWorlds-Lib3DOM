@@ -5,7 +5,10 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace Common.Emissary
 {
-    class CreateEmissary
+    public class CreateEmissary
     {
+        public void procCertFile(string certFile) { }
+        public void procCertStore(string dn) { }
+        public void procEmissaryDir(string dirName) { }
     }
 }

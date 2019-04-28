@@ -1,16 +1,15 @@
 ﻿using System;
+using Common.Emissary;
 
 namespace CreateSignedEmissary
 {
     class Program
     {
-        static void procCertFile(string certFile) { }
-        static void procCertStore(string dn) { }
-        static void procEmissaryDir(string dirName) { }
-
         static void Main(string[] args)
         {
             var haveCert = false;
+
+            var emissaryCreator = new CreateEmissary();
 
             for (int i = 0; i < args.Length; i++)
             {
@@ -19,7 +18,7 @@ namespace CreateSignedEmissary
                 if (arg == "--cert")
                 {
                     var certFile = args[i + 1];
-                    procCertFile(certFile);
+                    emissaryCreator.procCertFile(certFile);
                     i++;
                     haveCert = true;
                     continue;
@@ -28,7 +27,7 @@ namespace CreateSignedEmissary
                 if (arg == "--store")
                 {
                     var storeDn = args[i + 1];
-                    procCertStore(storeDn);
+                    emissaryCreator.procCertStore(storeDn);
                     i++;
                     haveCert = true;
                     continue;
@@ -37,7 +36,7 @@ namespace CreateSignedEmissary
                 if (!haveCert)
                     throw new Exception("You must specify an cert before directories");
 
-                procEmissaryDir(arg);
+                emissaryCreator.procEmissaryDir(arg);
             }
         }
     }

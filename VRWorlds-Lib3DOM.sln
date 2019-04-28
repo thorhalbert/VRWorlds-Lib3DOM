@@ -35,7 +35,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MarshallEmissary", "Marshal
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{C4D3C944-71A9-414E-B500-832834E2519E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreateSignedEmissary", "Tools\CreateSignedEmissary\CreateSignedEmissary.csproj", "{01543A5E-4AB6-4400-8F78-311A3FB8972C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CreateSignedEmissary", "Tools\CreateSignedEmissary\CreateSignedEmissary.csproj", "{01543A5E-4AB6-4400-8F78-311A3FB8972C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8C899D40-00AD-4572-BB04-063FF40D0916} = {8C899D40-00AD-4572-BB04-063FF40D0916}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{13723AC4-A83B-4BC1-A757-87691DB0D673}"
 	ProjectSection(SolutionItems) = preProject
