@@ -41,3 +41,21 @@ Manifest file is JSON
  *** Path
  *** Length
  *** SHA256
+
+
+
+ Generate a key - this is not yet validated or part of a CA chain -- that's later:
+
+ openssl genpkey -algorithm RSA -pkeyopt rsa_keygen_bits:2048 -pkeyopt rsa_keygen_pubexp:3 -out privkey-ID.pem
+
+ Extract the private key:
+
+ openssl pkey -in privkey-ID.pem -out pubkey-ID.pem -pubout
+
+
+
+ CreateSignedEmissary
+		--cert cert-filename
+		--store  distinguished-name
+
+		directories...
