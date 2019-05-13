@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using ICSharpCode.SharpZipLib.Tar;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -17,7 +18,40 @@ namespace Common.Emissary
         {
         }
 
+        private static void CreateEmissary(string manifestDir, EmissaryManifest manifest, List<ContentItem> manifestItems, string outFileName, string tmpFileName)
+        {
+            void writeEntries(IEnumerable<ContentItem> contents, TarArchive tarOutput)
+            {
+                foreach (var content in contents)
+                {
+                    var file = Path.Combine(manifestDir, content.Path);
 
+                    var entry = TarEntry.CreateEntryFromFile(file);
+                    entry.Name = content.Path;
+                    entry.UserId = 0;
+                    entry.GroupId = 0;
+                    entry.UserName = manifest.DeveloperId;
+                    entry.GroupName = manifest.ManufacturerId;
+
+                    tarOutput.WriteEntry(entry, false);
+                }
+            }
+
+            // To write a strict tar file we really need to be creating directories too
+
+            using (var binaryStream = new BinaryWriter(File.Open(tmpFileName, FileMode.Create)))
+            using (var tarOutput = TarArchive.CreateOutputTarArchive(binaryStream.BaseStream))
+            {
+                // Write the main files
+
+                writeEntries(manifest.Contents, tarOutput);
+                writeEntries(manifestItems, tarOutput);  // Though these are all in the root diretory
+
+                tarOutput.Close();
+            }
+
+            File.Move(tmpFileName, outFileName);
+        }
 
         private static string determinePathStub(string baseStub, string targetPath)
         {
@@ -37,7 +71,6 @@ namespace Common.Emissary
             {
                 bool allow;
 
-
                 foreach (var d in dir.GetDirectories())
                 {
                     var pathStub = determinePathStub(dirInfo.FullName, d.FullName);
@@ -49,7 +82,7 @@ namespace Common.Emissary
                         switch (pathStub)
                         {
                             case "_code":
-                            case "_payload";
+                            case "_payload":
                                 allow = true;
                                 break;
                         }

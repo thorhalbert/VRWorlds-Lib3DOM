@@ -12,6 +12,7 @@
     <PackageReference Include="MongoDB.Driver" Version="2.8.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
     <PackageReference Include="Otp.NET" Version="1.2.1" />
+    <PackageReference Include="SharpZipLib" Version="1.1.0" />
     <PackageReference Include="System.Data.SQLite" Version="1.0.110" />
     <PackageReference Include="System.Security.Cryptography.OpenSsl" Version="4.5.1" />
     <PackageReference Include="Vlingo.UUID" Version="1.0.0" />
