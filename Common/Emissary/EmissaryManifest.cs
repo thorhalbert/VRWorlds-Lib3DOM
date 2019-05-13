@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using Vlingo.UUID;
@@ -11,27 +12,193 @@ namespace Common.Emissary
 {
     public static class EmissarySerialization
     {
-        public static void ReadManifest()
+        /*
+         * Algorithm:
+         *      Collect private key guid and directory for emissary dir
+         *      Remove output files like signature 
+         *      Read existing manifest if exists
+         *      Do the file Assay, supplying old list/dirtystates if they exist
+         *      Write out updated manifest  
+         *      Check for status/proper files/sanity of all fields
+         *      If there are errors, such as unfilled in entries or missing files, report and exit
+         *      Start list of manifest items
+         *          Add Manifest to manifest items
+         *      Compute sha256 of manifest
+         *      Generate a guid from the sha256 
+         *      Generate public key from full certificate
+         *          Add cert to manifest items
+         *      Sign this via our private cert
+         *      Write out signature
+         *          Add signature to manifest
+         *      Generate tar file from main manifest and manifest items
+         *      Rename to final filename
+         *      Store manifest keyed by the guid
+         *          Write manifest summary file
+         *          
+         *  Probably need some way to handle the differences between windows and linux.  Though
+         *  initially we'll just utilize a full der file.   Windows has a cert-store.
+         *  
+         *  ISSUES:
+         *      We really need to validate the certicate chain, the manufacturer and developer ID,
+         *      and possibily the 
+         */
+
+        private const string manifestFile = "Manifest.json";
+        private const string publicCertFile = "PublicCert.der";
+        private const string manifestSignature = "Manifest.sig";
+        private const string manifestSummary = "ManifestSummary.json";
+
+        public static bool GenerateEmissary(string certFile, string emissaryDir)
         {
-        }
-        public static void WriteManifest()
-        {
+            // Map out to real files
+
+            var fullManifestFile = Path.Combine(emissaryDir, manifestFile);
+            var fullpublicCertFile = Path.Combine(emissaryDir, publicCertFile);
+            var fullmanifestSignature = Path.Combine(emissaryDir, manifestSignature);
+            var fullmanifestSummary = Path.Combine(emissaryDir, manifestSummary);
+
+            // Clear out true outputs
+
+            if (File.Exists(fullpublicCertFile))
+                File.Delete(fullpublicCertFile);
+
+            if (File.Exists(fullmanifestSignature))
+                File.Delete(fullmanifestSignature);
+
+            if (File.Exists(fullmanifestSummary))
+                File.Delete(fullmanifestSummary);
+
+            // Read in the manifest if it exists, or initialize it if not
+
+            var projectManifest = _initializeEmptyManifest();
+            if (File.Exists(fullManifestFile))
+                projectManifest = _readManifest(fullManifestFile);
+
+            // File assay - compute content items
+
+            var manifestItems = new List<ContentItem>();
+            var contentItems = _assayFiles(emissaryDir, projectManifest.Contents);
+            projectManifest.Contents = contentItems.ToList();
+
+            // Check for sanity
+
+            if (!_checkSanity(projectManifest))
+            {
+                // Generate the manifest so the user can update it
+
+                _generateManifestFile(projectManifest, manifestFile);
+
+                return false;
+            }
+
+            // Generate the cert file
+
+            _generatePublicCertFile(certFile, publicCertFile);
+            _addManifestItem(manifestItems, publicCertFile);
+
+            // Compute the guid for this run
+
+            var emissaryGuid = Guid.NewGuid();
+
+            projectManifest.EmissaryInstanceId = emissaryGuid;
+            projectManifest.GenerateDate = DateTimeOffset.Now;
+
+            // Generate the manifest - the manifest itself can't be in it, or the signature
+            // Add the cert file
+
+            contentItems = _assayFiles(emissaryDir, projectManifest.Contents);
+            projectManifest.Contents = contentItems.ToList();
+
+            _generateManifestFile(projectManifest, manifestFile);
+
+            _addManifestItem(manifestItems, manifestFile);
+
+            // Compute and sign the hash
+
+            var manifestHash = _computeHash(manifestFile);
+
+            var signature = _signAndWriteSignature(manifestHash, manifestSignature);
+
+            _addManifestItem(manifestItems, manifestSignature);
+
+            _generateManifestSummary(projectManifest, manifestHash, signature);
+
+            // Eventually this will have to talk to a database or a server
+
+            // Create the actual manifest file
+
+            var emissaryTmp = Path.Combine(emissaryDir, emissaryGuid.ToString() + ".tmp");
+            var emissaryFile = Path.Combine(emissaryDir, projectManifest.EmissaryClassId + "-"+ emissaryGuid.ToString() + ".emissary");
+
+            _createEmissary(emissaryDir, projectManifest, manifestItems, emissaryFile, emissaryTmp);
+
+            return true;
         }
 
-        private static void CreateEmissary(string manifestDir, EmissaryManifest manifest, List<ContentItem> manifestItems, string outFileName, string tmpFileName)
+        private static void _generateManifestSummary(EmissaryManifest projectManifest, byte[] manifestHash, byte[] signature)
+        {
+            throw new NotImplementedException();
+        }
+
+        private static byte[] _signAndWriteSignature(byte[] manifestHash, string manifestSignature)
+        {
+            throw new NotImplementedException();
+        }
+
+        private static byte[] _computeHash(string manifestFile)
+        {
+            throw new NotImplementedException();
+        }
+
+        private static void _addManifestItem(List<ContentItem> manifestItems, string publicCertFile)
+        {
+            throw new NotImplementedException();
+        }
+
+        private static void _generateManifestFile(EmissaryManifest projectManifest, string manifestFile)
+        {
+            throw new NotImplementedException();
+        }
+
+        private static bool _checkSanity(EmissaryManifest projectManifest)
+        {
+            throw new NotImplementedException();
+        }
+
+        private static void _generatePublicCertFile(string certFile, string publicCertFile)
+        {
+            throw new NotImplementedException();
+        }
+
+        private static EmissaryManifest _readManifest(string fullManifestFile)
+        {
+            throw new NotImplementedException();
+        }
+
+        private static EmissaryManifest _initializeEmptyManifest()
+        {
+            throw new NotImplementedException();
+        }
+
+        private static void _createEmissary(string manifestDir, EmissaryManifest manifest, List<ContentItem> manifestItems, string outFileName, string tmpFileName)
         {
             void writeEntries(IEnumerable<ContentItem> contents, TarArchive tarOutput)
             {
                 foreach (var content in contents)
                 {
                     var file = Path.Combine(manifestDir, content.Path);
+                    var tarPath = content.Path;
+
+                    // Perform de-windowification
+                    if (Path.DirectorySeparatorChar != '/')
+                        tarPath = tarPath.Replace(Path.DirectorySeparatorChar, '/');
 
                     var entry = TarEntry.CreateEntryFromFile(file);
-                    entry.Name = content.Path;
+                    entry.Name = tarPath;
                     entry.UserId = 0;
                     entry.GroupId = 0;
-                    entry.UserName = manifest.DeveloperId;
-                    entry.GroupName = manifest.ManufacturerId;
+                    entry.UserName = manifest.DeveloperId.ToString();   // This might be too big
+                    entry.GroupName = manifest.ManufacturerId.ToString();
 
                     tarOutput.WriteEntry(entry, false);
                 }
@@ -53,13 +220,12 @@ namespace Common.Emissary
             File.Move(tmpFileName, outFileName);
         }
 
-        private static string determinePathStub(string baseStub, string targetPath)
+        private static string _determinePathStub(string baseStub, string targetPath)
         {
             return null;
         }
-        public static IEnumerable<ContentItem> AssayFiles(string emissaryDir, IEnumerable<ContentItem> originalContentList)
+        private static IEnumerable<ContentItem> _assayFiles(string emissaryDir, IEnumerable<ContentItem> originalContentList)
         {
-
             var uuid5Gen = new NameBasedGenerator(HashType.SHA1);
 
             var newFiles = new Dictionary<Guid, ContentItem>();
@@ -73,7 +239,7 @@ namespace Common.Emissary
 
                 foreach (var d in dir.GetDirectories())
                 {
-                    var pathStub = determinePathStub(dirInfo.FullName, d.FullName);
+                    var pathStub = _determinePathStub(dirInfo.FullName, d.FullName);
 
                     if (level == 0)
                     {
@@ -96,18 +262,18 @@ namespace Common.Emissary
 
                 foreach (var f in dir.GetFiles())
                 {
-                    var pathStub = determinePathStub(dirInfo.FullName, f.FullName);
+                    var pathStub = _determinePathStub(dirInfo.FullName, f.FullName);
                     var fileGuid = uuid5Gen.GenerateGuid(UUIDNameSpace.URL, pathStub);
 
                     if (level == 0)
                     {
                         allow = false;
 
+                        // No files in the root that aren't generated
+
                         switch (pathStub)
                         {
-                            case "CERT.CA":
-                                // case "Manifest.json":   // We're going to modify this  
-                                // case "Manifest.pem":    // We'll generate this and overwrite
+                            case publicCertFile:
                                 allow = true;
                                 break;
                         }
@@ -132,7 +298,6 @@ namespace Common.Emissary
                         SHA256 = null
                     });
                 }
-
             }
 
             _pursueDirs(dirInfo, 0);
@@ -159,7 +324,7 @@ namespace Common.Emissary
                     newFile.Dirty = true;
 
                 if (newFile.Dirty)
-                    ComputeHash(newFile, Path.Combine(emissaryDir, o.Path));
+                    _computeHash(newFile, Path.Combine(emissaryDir, o.Path));
 
                 newComposites.Add(o.Path, newFile);
 
@@ -172,7 +337,7 @@ namespace Common.Emissary
             {
                 var newFile = n.Value;
 
-                ComputeHash(newFile, Path.Combine(emissaryDir, newFile.Path));
+                _computeHash(newFile, Path.Combine(emissaryDir, newFile.Path));
                 newComposites.Add(newFile.Path, newFile);
             }
 
@@ -182,7 +347,7 @@ namespace Common.Emissary
 
             return outputList;
         }
-        public static void ComputeHash(ContentItem newFile, string v)
+        public static void _computeHash(ContentItem newFile, string v)
         {
             SHA256 mySHA256 = SHA256Managed.Create();
 
@@ -213,14 +378,23 @@ namespace Common.Emissary
         [JsonProperty]
         public string APIVersion { get; set; }
 
+        [JsonProperty(PropertyName = "Generate-Date")]
+        public DateTimeOffset GenerateDate { get; set; }
+
         [JsonProperty(PropertyName = "Manufacturer-ID")]
-        public string ManufacturerId { get; set; }
+        public Guid ManufacturerId { get; set; }
 
         [JsonProperty(PropertyName = "Signer-CERT-ID")]
-        public string SignerCertId { get; set; }
+        public Guid SignerCertId { get; set; }
 
         [JsonProperty(PropertyName = "Developer-ID")]
-        public string DeveloperId { get; set; }
+        public Guid DeveloperId { get; set; }
+
+        [JsonProperty(PropertyName = "Emissary-Class-ID")]
+        public Guid EmissaryClassId { get; set; }
+
+        [JsonProperty(PropertyName = "Emissary-Instance-ID")]
+        public Guid EmissaryInstanceId { get; set; }
 
         [JsonProperty(PropertyName = "Primary-Role")]
         public EmissaryRoles PrimaryRole { get; set; }
@@ -257,9 +431,11 @@ namespace Common.Emissary
             Version = "0.0";
             APIVersion = "0.0";
 
-            ManufacturerId = "UNSET";
-            SignerCertId = "UNSET";
-            DeveloperId = "UNSET";
+            ManufacturerId = Guid.Empty;
+            SignerCertId = Guid.Empty;
+            DeveloperId = Guid.Empty;
+            EmissaryClassId = Guid.Empty;
+            EmissaryInstanceId = Guid.Empty;
 
             PrimaryRole = EmissaryRoles.Unset;
             IndirectRole = EmissaryRoles.Unset;
