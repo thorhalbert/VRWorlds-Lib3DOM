@@ -130,7 +130,7 @@ namespace Common.Emissary
 
             // Generate the cert file
 
-            _generatePublicCertFile(certFile, fullpublicCertFile);
+            projectManifest.SignerCertId = _generatePublicCertFile(certFile, fullpublicCertFile);
             //_addManifestItem(manifestItems, publicCertFile, fullpublicCertFile);
 
             // Compute the guid for this run
@@ -153,7 +153,7 @@ namespace Common.Emissary
 
             var manifestHash = _computeHash(fullManifestFile);
 
-            _signAndWriteSignature(signingKey, manifestHash, fullmanifestSignature);
+            _signAndWriteSignature(signingKey, certFile, manifestHash, fullmanifestSignature);
             _addManifestItem(manifestItems, manifestSignature, fullmanifestSignature);
 
             //_generateManifestSummary(projectManifest, manifestHash, signature);
@@ -165,7 +165,6 @@ namespace Common.Emissary
             var emissaryTmp = Path.Combine(emissaryDir, emissaryGuid.ToString() + ".tmp");
             var dateStamp = DateTime.UtcNow.ToString("yyyyMMddHHmm");
             var emissaryFile = Path.Combine(emissaryDir, projectManifest.EmissaryClassId + "-" + dateStamp + "-" + emissaryGuid.ToString() + ".emissary");
-
 
             _createEmissary(emissaryDir, projectManifest, manifestItems, emissaryFile, emissaryTmp);
 
@@ -187,18 +186,17 @@ namespace Common.Emissary
         //    throw new NotImplementedException();
         //}
 
-        private static void _signAndWriteSignature(string certFile, byte[] manifestHash, string manifestSignature)
+        private static void _signAndWriteSignature(string privateKey, string publicKey, byte[] manifestHash, string manifestSignature)
         {
-            using (var stream = File.OpenRead(certFile))
+            using (var stream = File.OpenRead(privateKey))
             using (var reader = new PemReader(stream))
             {
-
                 var rsaParameters = reader.ReadRsaKey();
 
                 var rsaMachine = new RSACryptoServiceProvider();
                 rsaMachine.ImportParameters(rsaParameters);
 
-                var certSig = rsaMachine.SignData(manifestHash, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
+                var certSig = rsaMachine.SignHash(manifestHash, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
 
                 using (var text = new StreamWriter(manifestSignature))
                 {
@@ -207,6 +205,12 @@ namespace Common.Emissary
                     text.WriteLine("-----END TRUSTED CERTIFICATE-----");
                 }
             }
+
+            //var cert = new X509Certificate2(publicKey);
+
+            //var pub = cert.GetRSAPublicKey();
+
+            //pub.VerifyHash()
         }
 
         private static void _addManifestItem(List<ContentItem> manifestItems, string fileName, string fullFileName)
@@ -238,8 +242,8 @@ namespace Common.Emissary
 
             if (projectManifest.ManufacturerId == Guid.Empty)
                 errors.Add("ManufacturerId is not set");
-            if (projectManifest.SignerCertId == Guid.Empty)
-                errors.Add("SignerCertId is not set");
+            //if (projectManifest.SignerCertId == Guid.Empty)
+            //    errors.Add("SignerCertId is not set");
             if (projectManifest.DeveloperId == Guid.Empty)
                 errors.Add("DeveloperId is not set");
             if (projectManifest.EmissaryClassId == Guid.Empty)
@@ -258,25 +262,28 @@ namespace Common.Emissary
             return (errors.Count != 0, errors);
         }
 
-        private static void _generatePublicCertFile(string certFile, string publicCertFile)
+        private static Guid _generatePublicCertFile(string certFile, string publicCertFile)
         {
             // This probably needs to be more secure ultimately
             var cert = new X509Certificate2(certFile);
 
             var certOutput = cert.Export(X509ContentType.Cert);
 
-            using (var stream = File.CreateText(publicCertFile))
-            using (var writer = new PemWriter(stream.BaseStream))
+            //using (var stream = File.CreateText(publicCertFile))
+            //using (var writer = new PemWriter(stream.BaseStream))
+            //{
+            //    writer.WritePublicKey(cert.GetRSAPublicKey());
+            //}
+
+            using (var text = new StreamWriter(publicCertFile))
             {
-                writer.WritePublicKey(cert.GetRSAPublicKey());
+                text.WriteLine("-----BEGIN CERTIFICATE-----");
+                text.WriteLine(Convert.ToBase64String(certOutput, Base64FormattingOptions.InsertLineBreaks));
+                text.WriteLine("-----END CERTIFICATE-----");
             }
 
-            //    using (var text = new StreamWriter(publicCertFile))
-            //{
-            //    text.WriteLine("-----BEGIN CERTIFICATE-----");
-            //    text.WriteLine(Convert.ToBase64String(certOutput, Base64FormattingOptions.InsertLineBreaks));
-            //    text.WriteLine("-----END CERTIFICATE-----");
-            //}
+            var pubId = cert.GetPublicKeyString();
+            return _uuid5Gen.GenerateGuid(UUIDNameSpace.URL, "CODESIGNER/" + pubId);
         }
 
         private static EmissaryManifest _readManifest(string fullManifestFile)
@@ -312,7 +319,7 @@ namespace Common.Emissary
                     entry.UserId = 0;
                     entry.GroupId = 0;
                     entry.UserName = manifest.DeveloperId.ToString();   // This might be too big
-                    entry.GroupName = manifest.ManufacturerId.ToString();
+                    entry.GroupName = "";  // manifest.ManufacturerId.ToString();
 
                     tarOutput.WriteEntry(entry, false);
                 }
