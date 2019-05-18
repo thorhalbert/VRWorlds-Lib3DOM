@@ -152,7 +152,11 @@ namespace Common.Emissary
 
         private static byte[] _signAndWriteSignature(string certFile, byte[] manifestHash, string manifestSignature)
         {
-            throw new NotImplementedException();
+            var cert = new X509Certificate2(certFile);
+
+            var privateKey = cert.GetRSAPrivateKey();
+
+            return privateKey.SignData(manifestHash, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
         }
 
         private static void _addManifestItem(List<ContentItem> manifestItems, string fileName, string fullFileName)
@@ -206,8 +210,17 @@ namespace Common.Emissary
 
         private static void _generatePublicCertFile(string certFile, string publicCertFile)
         {
-            var cert = new X509Certificate(certFile);
-            var pubkey = cert.GetPublicKeyString();
+            // This probably needs to be more secure ultimately
+            var cert = new X509Certificate2(certFile);
+
+            var certOutput = cert.Export(X509ContentType.Cert);
+
+            using (var text = new StreamWriter(publicCertFile))
+            {
+                text.WriteLine("-----BEGIN CERTIFICATE-----");
+                text.WriteLine(Convert.ToBase64String(certOutput, Base64FormattingOptions.InsertLineBreaks));
+                text.WriteLine("-----END CERTIFICATE-----");
+            }
         }
 
         private static EmissaryManifest _readManifest(string fullManifestFile)
