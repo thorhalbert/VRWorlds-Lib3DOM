@@ -7,8 +7,20 @@ namespace Common.Emissary
 {
     public class CreateEmissary
     {
-        public void procCertFile(string certFile) { }
+        string signingCert;
+        string signingKey;
+        public void procCertFile(string certFile)
+        {
+            signingCert = certFile;
+        }
+        public void procKeyFile(string certFile)
+        {
+            signingKey = certFile;
+        }
         public void procCertStore(string dn) { }
-        public void procEmissaryDir(string dirName) { }
+        public void procEmissaryDir(string dirName)
+        {
+            EmissarySerialization.GenerateEmissary(signingKey, signingCert, dirName);
+        }
     }
 }

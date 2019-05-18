@@ -40,8 +40,13 @@ namespace Common.Emissary
          *  initially we'll just utilize a full der file.   Windows has a cert-store.
          *  
          *  ISSUES:
-         *      We really need to validate the certicate chain, the manufacturer and developer ID,
-         *      and possibily the 
+         *      We really need to validate the certicate chain, the manufacturer and developer ID
+         *      
+         *      We need to support microsofts certificate store
+         *      We also need to make sure the private key is at least passphrased 
+         *      Other possibility is that we call the kudo server to do the signing so we
+         *         keep the signing key in the secure environment (similarly we might get the
+         *         cert from there rather than expecting the developer to have the right one).
          */
 
         private const string manifestFile = "Manifest.json";
@@ -52,8 +57,18 @@ namespace Common.Emissary
         static internal SHA256 _genSHA256 = SHA256Managed.Create();
         static internal NameBasedGenerator _uuid5Gen = new NameBasedGenerator(HashType.SHA1);
 
-        public static bool GenerateEmissary(string certFile, string emissaryDir)
+        public static bool GenerateEmissary(string signingKey, string certFile, string emissaryDir)
         {
+            // Do some contract asserts
+            if (!File.Exists(signingKey))
+                throw new ArgumentException("Signing Key doesn't exist: " + signingKey);
+            if (!File.Exists(certFile))
+                throw new ArgumentException("Signing Certificate doesn't exist: " + certFile);
+            if (!Directory.Exists(emissaryDir))
+                throw new ArgumentException("Emissary directory doesn't exist: " + emissaryDir);
+
+            _checkCertificates(signingKey, certFile);
+
             // Map out to real files
 
             var fullManifestFile = Path.Combine(emissaryDir, manifestFile);
@@ -76,7 +91,17 @@ namespace Common.Emissary
 
             var projectManifest = _initializeEmptyManifest();
             if (File.Exists(fullManifestFile))
-                projectManifest = _readManifest(fullManifestFile);
+                try
+                {
+                    projectManifest = _readManifest(fullManifestFile);
+                }
+                catch(Exception ex)
+                {
+                    projectManifest = new EmissaryManifest();
+                }
+
+            if (projectManifest == null)
+                projectManifest = new EmissaryManifest();
 
             // File assay - compute content items
 
@@ -88,7 +113,7 @@ namespace Common.Emissary
 
             var (check, errors) = _checkSanity(projectManifest);
 
-            if (!check)
+            if (check)
             {
                 // Dump the error list
 
@@ -127,7 +152,7 @@ namespace Common.Emissary
 
             var manifestHash = _computeHash(fullManifestFile);
 
-            var signature = _signAndWriteSignature(certFile, manifestHash, fullManifestFile);
+            var signature = _signAndWriteSignature(signingKey, manifestHash, fullManifestFile);
 
             _addManifestItem(manifestItems, manifestSignature, fullManifestFile);
 
@@ -143,6 +168,16 @@ namespace Common.Emissary
             _createEmissary(emissaryDir, projectManifest, manifestItems, emissaryFile, emissaryTmp);
 
             return true;
+        }
+
+        private static void _checkCertificates(string signingKey, string certFile)
+        {
+            // Ultimately we need to check to see if this follows policy - key big enough, etc
+            // Also, it needs to be signed by our kudo server and be in the proper signing chain
+
+            // Also, check to see if the private key matches the public key
+
+            // We throw if invalid
         }
 
         //private static void _generateManifestSummary(EmissaryManifest projectManifest, byte[] manifestHash, byte[] signature)
@@ -280,7 +315,9 @@ namespace Common.Emissary
 
         private static string _determinePathStub(string baseStub, string targetPath)
         {
-            return null;
+            var path = targetPath.Substring(baseStub.Length);
+
+            return path;
         }
         private static IEnumerable<ContentItem> _assayFiles(string emissaryDir, IEnumerable<ContentItem> originalContentList)
         {
@@ -318,6 +355,8 @@ namespace Common.Emissary
 
                 foreach (var f in dir.GetFiles())
                 {
+                    if (f.FullName.EndsWith("~")) continue;   // Emacs temp files
+
                     var pathStub = _determinePathStub(dirInfo.FullName, f.FullName);
                     var fileGuid = _uuid5Gen.GenerateGuid(UUIDNameSpace.URL, pathStub);
 
@@ -489,7 +528,7 @@ namespace Common.Emissary
         }
 
     }
-    [JsonArray]
+    [JsonObject(MemberSerialization.OptIn)]
     public class ContentItem
     {
         public ContentItem(string pathStub, FileInfo f)
@@ -503,6 +542,9 @@ namespace Common.Emissary
             DirtyState = EmissarySerialization._uuid5Gen.GenerateGuid(UUIDNameSpace.URL, dirtyString);
             SHA256 = null;
             Dirty = true;
+
+            // Unixify the path if needed - might be other security scrubbing needed here on filenames
+            Path = Path.Replace('\\', '/').Trim();
         }
 
         public ContentItem(string fileName, string fullFileName) : this(fileName, new FileInfo(fullFileName))

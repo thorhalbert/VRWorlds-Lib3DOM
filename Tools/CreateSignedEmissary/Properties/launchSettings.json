@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "CreateSignedEmissary": {
+      "commandName": "Project",
+      "commandLineArgs": "--key c:\\temp\\emissary1\\sign.key --cert c:\\temp\\emissary1\\sign.crt c:\\temp\\emissary1\\"
+    }
+  }
+}

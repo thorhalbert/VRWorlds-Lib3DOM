@@ -8,12 +8,22 @@ namespace CreateSignedEmissary
         static void Main(string[] args)
         {
             var haveCert = false;
+            var haveKey = false;
 
             var emissaryCreator = new CreateEmissary();
 
             for (int i = 0; i < args.Length; i++)
             {
                 var arg = args[i];
+
+                if (arg=="--key")
+                {
+                    var keyFile = args[i + 1];
+                    emissaryCreator.procKeyFile(keyFile);
+                    haveKey = true;
+                    i++;
+                    continue;
+                }
 
                 if (arg == "--cert")
                 {
@@ -34,6 +44,8 @@ namespace CreateSignedEmissary
                 }
 
                 if (!haveCert)
+                    throw new Exception("You must specify an cert before directories");
+                if (!haveKey)
                     throw new Exception("You must specify an cert before directories");
 
                 emissaryCreator.procEmissaryDir(arg);
