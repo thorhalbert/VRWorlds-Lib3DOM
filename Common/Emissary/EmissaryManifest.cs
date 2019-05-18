@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using Vlingo.UUID;
 
@@ -48,6 +49,9 @@ namespace Common.Emissary
         private const string manifestSignature = "Manifest.sig";
         private const string manifestSummary = "ManifestSummary.json";
 
+        static internal SHA256 _genSHA256 = SHA256Managed.Create();
+        static internal NameBasedGenerator _uuid5Gen = new NameBasedGenerator(HashType.SHA1);
+
         public static bool GenerateEmissary(string certFile, string emissaryDir)
         {
             // Map out to real files
@@ -82,19 +86,26 @@ namespace Common.Emissary
 
             // Check for sanity
 
-            if (!_checkSanity(projectManifest))
+            var (check, errors) = _checkSanity(projectManifest);
+
+            if (!check)
             {
+                // Dump the error list
+
+                foreach (var e in errors)
+                    Console.WriteLine(e);
+
                 // Generate the manifest so the user can update it
 
-                _generateManifestFile(projectManifest, manifestFile);
+                _generateManifestFile(projectManifest, manifestFile, fullManifestFile);
 
                 return false;
             }
 
             // Generate the cert file
 
-            _generatePublicCertFile(certFile, publicCertFile);
-            _addManifestItem(manifestItems, publicCertFile);
+            _generatePublicCertFile(certFile, fullpublicCertFile);
+            _addManifestItem(manifestItems, publicCertFile, fullpublicCertFile);
 
             // Compute the guid for this run
 
@@ -109,75 +120,109 @@ namespace Common.Emissary
             contentItems = _assayFiles(emissaryDir, projectManifest.Contents);
             projectManifest.Contents = contentItems.ToList();
 
-            _generateManifestFile(projectManifest, manifestFile);
-
-            _addManifestItem(manifestItems, manifestFile);
+            _generateManifestFile(projectManifest, manifestFile, fullManifestFile);
+            _addManifestItem(manifestItems, manifestFile, fullManifestFile);
 
             // Compute and sign the hash
 
-            var manifestHash = _computeHash(manifestFile);
+            var manifestHash = _computeHash(fullManifestFile);
 
-            var signature = _signAndWriteSignature(manifestHash, manifestSignature);
+            var signature = _signAndWriteSignature(certFile, manifestHash, fullManifestFile);
 
-            _addManifestItem(manifestItems, manifestSignature);
+            _addManifestItem(manifestItems, manifestSignature, fullManifestFile);
 
-            _generateManifestSummary(projectManifest, manifestHash, signature);
+            //_generateManifestSummary(projectManifest, manifestHash, signature);
 
-            // Eventually this will have to talk to a database or a server
+            // Eventually this will have to talk to a database or a server - or we'll have some checkin feature
 
-            // Create the actual manifest file
+            // Create the actual manifest file (tar)
 
             var emissaryTmp = Path.Combine(emissaryDir, emissaryGuid.ToString() + ".tmp");
-            var emissaryFile = Path.Combine(emissaryDir, projectManifest.EmissaryClassId + "-"+ emissaryGuid.ToString() + ".emissary");
+            var emissaryFile = Path.Combine(emissaryDir, projectManifest.EmissaryClassId + "-" + emissaryGuid.ToString() + ".emissary");
 
             _createEmissary(emissaryDir, projectManifest, manifestItems, emissaryFile, emissaryTmp);
 
             return true;
         }
 
-        private static void _generateManifestSummary(EmissaryManifest projectManifest, byte[] manifestHash, byte[] signature)
+        //private static void _generateManifestSummary(EmissaryManifest projectManifest, byte[] manifestHash, byte[] signature)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        private static byte[] _signAndWriteSignature(string certFile, byte[] manifestHash, string manifestSignature)
         {
             throw new NotImplementedException();
         }
 
-        private static byte[] _signAndWriteSignature(byte[] manifestHash, string manifestSignature)
+        private static void _addManifestItem(List<ContentItem> manifestItems, string fileName, string fullFileName)
         {
-            throw new NotImplementedException();
+            var item = new ContentItem(fileName, fullFileName);
+            _computeHash(item, fullFileName);
+            manifestItems.Add(item);
         }
 
-        private static byte[] _computeHash(string manifestFile)
+        private static void _generateManifestFile(EmissaryManifest projectManifest, string manifestFile, string physicalFile)
         {
-            throw new NotImplementedException();
+            using (StreamWriter file = File.CreateText(physicalFile))
+            {
+                var doSerial = new JsonSerializer();
+                doSerial.Formatting = Formatting.Indented;
+
+                doSerial.Serialize(file, projectManifest);
+            }
         }
 
-        private static void _addManifestItem(List<ContentItem> manifestItems, string publicCertFile)
+        private static (bool, List<string>) _checkSanity(EmissaryManifest projectManifest)
         {
-            throw new NotImplementedException();
-        }
+            var errors = new List<string>();
 
-        private static void _generateManifestFile(EmissaryManifest projectManifest, string manifestFile)
-        {
-            throw new NotImplementedException();
-        }
+            if (projectManifest.Version == "0.0")
+                errors.Add("Version is not set");
+            if (projectManifest.APIVersion == "0.0")
+                errors.Add("APIVersion is not set");
 
-        private static bool _checkSanity(EmissaryManifest projectManifest)
-        {
-            throw new NotImplementedException();
+            if (projectManifest.ManufacturerId == Guid.Empty)
+                errors.Add("ManufacturerId is not set");
+            if (projectManifest.SignerCertId == Guid.Empty)
+                errors.Add("SignerCertId is not set");
+            if (projectManifest.DeveloperId == Guid.Empty)
+                errors.Add("DeveloperId is not set");
+            if (projectManifest.EmissaryClassId == Guid.Empty)
+                errors.Add("EmissaryClassId is not set");
+            if (projectManifest.EmissaryInstanceId == Guid.Empty)
+                errors.Add("EmissaryInstanceId is not set");
+
+            if (projectManifest.PrimaryRole == EmissaryRoles.Unset)
+                errors.Add("PrimaryRole is not set");
+            if (projectManifest.IndirectRole == EmissaryRoles.Unset)
+                errors.Add("IndirectRole is not set");
+
+            // Have to check for required files
+
+
+            return (errors.Count != 0, errors);
         }
 
         private static void _generatePublicCertFile(string certFile, string publicCertFile)
         {
-            throw new NotImplementedException();
+            var cert = new X509Certificate(certFile);
+            var pubkey = cert.GetPublicKeyString();
         }
 
         private static EmissaryManifest _readManifest(string fullManifestFile)
         {
-            throw new NotImplementedException();
+            using (var file = File.OpenText(fullManifestFile))
+            {
+                var doSerial = new JsonSerializer();
+                var newManifest = (EmissaryManifest)doSerial.Deserialize(file, typeof(EmissaryManifest));
+                return newManifest;
+            }
         }
 
         private static EmissaryManifest _initializeEmptyManifest()
         {
-            throw new NotImplementedException();
+            return new EmissaryManifest();
         }
 
         private static void _createEmissary(string manifestDir, EmissaryManifest manifest, List<ContentItem> manifestItems, string outFileName, string tmpFileName)
@@ -226,8 +271,6 @@ namespace Common.Emissary
         }
         private static IEnumerable<ContentItem> _assayFiles(string emissaryDir, IEnumerable<ContentItem> originalContentList)
         {
-            var uuid5Gen = new NameBasedGenerator(HashType.SHA1);
-
             var newFiles = new Dictionary<Guid, ContentItem>();
 
             var dirInfo = new DirectoryInfo(emissaryDir);
@@ -263,7 +306,7 @@ namespace Common.Emissary
                 foreach (var f in dir.GetFiles())
                 {
                     var pathStub = _determinePathStub(dirInfo.FullName, f.FullName);
-                    var fileGuid = uuid5Gen.GenerateGuid(UUIDNameSpace.URL, pathStub);
+                    var fileGuid = _uuid5Gen.GenerateGuid(UUIDNameSpace.URL, pathStub);
 
                     if (level == 0)
                     {
@@ -282,21 +325,8 @@ namespace Common.Emissary
                             continue;
                     }
 
-                    var dirtyLength = f.Length;
-                    var dirtyWrite = f.LastWriteTimeUtc;
+                    newFiles.Add(fileGuid, new ContentItem(pathStub, f));
 
-                    var dirtyString = dirtyWrite.ToLongDateString() + "|" + dirtyLength.ToString();
-
-                    var dirtyState = uuid5Gen.GenerateGuid(UUIDNameSpace.URL, dirtyString);
-
-                    newFiles.Add(fileGuid, new ContentItem
-                    {
-                        Path = pathStub,
-                        DirtyState = dirtyState,
-                        Dirty = false,
-                        Length = dirtyLength,
-                        SHA256 = null
-                    });
                 }
             }
 
@@ -308,7 +338,7 @@ namespace Common.Emissary
 
             foreach (var o in originalContentList)
             {
-                var fileGuid = uuid5Gen.GenerateGuid(UUIDNameSpace.URL, o.Path);
+                var fileGuid = _uuid5Gen.GenerateGuid(UUIDNameSpace.URL, o.Path);
                 o.Dirty = true;
 
                 if (!newFiles.ContainsKey(fileGuid))
@@ -347,19 +377,21 @@ namespace Common.Emissary
 
             return outputList;
         }
+
+        private static byte[] _computeHash(string manifestFile)
+        {
+            using (var filestream = new FileStream(manifestFile, FileMode.Open))
+            {
+                return _genSHA256.ComputeHash(filestream);
+            }
+        }
         public static void _computeHash(ContentItem newFile, string v)
         {
-            SHA256 mySHA256 = SHA256Managed.Create();
+            var hashValue = _computeHash(v);
 
-            using (var filestream = new FileStream(v, FileMode.Open)
-            {
-                Position = 0
-            })
-            {
-                byte[] hashValue = mySHA256.ComputeHash(filestream);
+            newFile.SHA256 = BitConverter.ToString(hashValue).Replace("-", String.Empty);
 
-                newFile.SHA256 = BitConverter.ToString(hashValue).Replace("-", String.Empty);
-            }
+            newFile.Dirty = false;
         }
     }
     public enum EmissaryRoles
@@ -447,6 +479,23 @@ namespace Common.Emissary
     [JsonArray]
     public class ContentItem
     {
+        public ContentItem(string pathStub, FileInfo f)
+        {
+            Path = pathStub;
+            Length = f.Length;
+            var dirtyWrite = f.LastWriteTimeUtc;
+
+            var dirtyString = dirtyWrite.ToLongDateString() + "|" + Length.ToString();
+
+            DirtyState = EmissarySerialization._uuid5Gen.GenerateGuid(UUIDNameSpace.URL, dirtyString);
+            SHA256 = null;
+            Dirty = true;
+        }
+
+        public ContentItem(string fileName, string fullFileName) : this(fileName, new FileInfo(fullFileName))
+        {
+        }
+
         [JsonProperty]
         public string Path { get; set; }
 
