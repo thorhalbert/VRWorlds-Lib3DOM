@@ -46,7 +46,7 @@ namespace CreateSignedEmissary
                 if (!haveCert)
                     throw new Exception("You must specify an cert before directories");
                 if (!haveKey)
-                    throw new Exception("You must specify an cert before directories");
+                    throw new Exception("You must specify a key before directories");
 
                 emissaryCreator.procEmissaryDir(arg);
             }

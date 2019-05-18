@@ -1,5 +1,6 @@
 ﻿using ICSharpCode.SharpZipLib.Tar;
 using Newtonsoft.Json;
+using PemUtils;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -50,7 +51,7 @@ namespace Common.Emissary
          */
 
         private const string manifestFile = "Manifest.json";
-        private const string publicCertFile = "PublicCert.der";
+        private const string publicCertFile = "PublicCert.crt";
         private const string manifestSignature = "Manifest.sig";
         private const string manifestSummary = "ManifestSummary.json";
 
@@ -130,7 +131,7 @@ namespace Common.Emissary
             // Generate the cert file
 
             _generatePublicCertFile(certFile, fullpublicCertFile);
-            _addManifestItem(manifestItems, publicCertFile, fullpublicCertFile);
+            //_addManifestItem(manifestItems, publicCertFile, fullpublicCertFile);
 
             // Compute the guid for this run
 
@@ -152,9 +153,8 @@ namespace Common.Emissary
 
             var manifestHash = _computeHash(fullManifestFile);
 
-            var signature = _signAndWriteSignature(signingKey, manifestHash, fullManifestFile);
-
-            _addManifestItem(manifestItems, manifestSignature, fullManifestFile);
+            _signAndWriteSignature(signingKey, manifestHash, fullmanifestSignature);
+            _addManifestItem(manifestItems, manifestSignature, fullmanifestSignature);
 
             //_generateManifestSummary(projectManifest, manifestHash, signature);
 
@@ -163,7 +163,9 @@ namespace Common.Emissary
             // Create the actual manifest file (tar)
 
             var emissaryTmp = Path.Combine(emissaryDir, emissaryGuid.ToString() + ".tmp");
-            var emissaryFile = Path.Combine(emissaryDir, projectManifest.EmissaryClassId + "-" + emissaryGuid.ToString() + ".emissary");
+            var dateStamp = DateTime.UtcNow.ToString("yyyyMMddHHmm");
+            var emissaryFile = Path.Combine(emissaryDir, projectManifest.EmissaryClassId + "-" + dateStamp + "-" + emissaryGuid.ToString() + ".emissary");
+
 
             _createEmissary(emissaryDir, projectManifest, manifestItems, emissaryFile, emissaryTmp);
 
@@ -185,13 +187,26 @@ namespace Common.Emissary
         //    throw new NotImplementedException();
         //}
 
-        private static byte[] _signAndWriteSignature(string certFile, byte[] manifestHash, string manifestSignature)
+        private static void _signAndWriteSignature(string certFile, byte[] manifestHash, string manifestSignature)
         {
-            var cert = new X509Certificate2(certFile);
+            using (var stream = File.OpenRead(certFile))
+            using (var reader = new PemReader(stream))
+            {
 
-            var privateKey = cert.GetRSAPrivateKey();
+                var rsaParameters = reader.ReadRsaKey();
 
-            return privateKey.SignData(manifestHash, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
+                var rsaMachine = new RSACryptoServiceProvider();
+                rsaMachine.ImportParameters(rsaParameters);
+
+                var certSig = rsaMachine.SignData(manifestHash, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
+
+                using (var text = new StreamWriter(manifestSignature))
+                {
+                    text.WriteLine("-----BEGIN TRUSTED CERTIFICATE-----");
+                    text.WriteLine(Convert.ToBase64String(certSig, Base64FormattingOptions.InsertLineBreaks));
+                    text.WriteLine("-----END TRUSTED CERTIFICATE-----");
+                }
+            }
         }
 
         private static void _addManifestItem(List<ContentItem> manifestItems, string fileName, string fullFileName)
@@ -229,8 +244,8 @@ namespace Common.Emissary
                 errors.Add("DeveloperId is not set");
             if (projectManifest.EmissaryClassId == Guid.Empty)
                 errors.Add("EmissaryClassId is not set");
-            if (projectManifest.EmissaryInstanceId == Guid.Empty)
-                errors.Add("EmissaryInstanceId is not set");
+            //if (projectManifest.EmissaryInstanceId == Guid.Empty)
+            //    errors.Add("EmissaryInstanceId is not set");
 
             if (projectManifest.PrimaryRole == EmissaryRoles.Unset)
                 errors.Add("PrimaryRole is not set");
@@ -250,12 +265,18 @@ namespace Common.Emissary
 
             var certOutput = cert.Export(X509ContentType.Cert);
 
-            using (var text = new StreamWriter(publicCertFile))
+            using (var stream = File.CreateText(publicCertFile))
+            using (var writer = new PemWriter(stream.BaseStream))
             {
-                text.WriteLine("-----BEGIN CERTIFICATE-----");
-                text.WriteLine(Convert.ToBase64String(certOutput, Base64FormattingOptions.InsertLineBreaks));
-                text.WriteLine("-----END CERTIFICATE-----");
+                writer.WritePublicKey(cert.GetRSAPublicKey());
             }
+
+            //    using (var text = new StreamWriter(publicCertFile))
+            //{
+            //    text.WriteLine("-----BEGIN CERTIFICATE-----");
+            //    text.WriteLine(Convert.ToBase64String(certOutput, Base64FormattingOptions.InsertLineBreaks));
+            //    text.WriteLine("-----END CERTIFICATE-----");
+            //}
         }
 
         private static EmissaryManifest _readManifest(string fullManifestFile)
@@ -531,6 +552,7 @@ namespace Common.Emissary
     [JsonObject(MemberSerialization.OptIn)]
     public class ContentItem
     {
+        public ContentItem() { }  
         public ContentItem(string pathStub, FileInfo f)
         {
             Path = pathStub;
