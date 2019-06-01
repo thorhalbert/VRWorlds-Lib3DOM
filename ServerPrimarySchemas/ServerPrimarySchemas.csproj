@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProtoBuf Include="**/*.proto" />
+    <ProtoBuf Include="**/*.proto" OutputDir="%(RelativeDir)" CompileOutputs="false" GrpcServices="Both" />
   </ItemGroup>
 
   <ItemGroup>
@@ -21,6 +21,11 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProtoBuf Update="StandardsProtoBufs\DateTimeOffset.proto" Access="Public" />
+    <ProtoBuf Update="StandardsProtoBufs\GUID.proto" Access="Public" />
   </ItemGroup>
 
 </Project>
