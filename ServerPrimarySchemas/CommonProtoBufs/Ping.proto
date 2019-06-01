@@ -1,0 +1,24 @@
+﻿/* Common Ping Service (prototype) */
+
+syntax = "proto3";
+
+/*
+package CommonProto;
+
+import "StandardsProtoBufs/DateTimeOffset.proto";
+import "StandardsProtoBufs/GUID.proto";
+
+message PingReturn {
+	ProtoGuid ServerGuid = 1;
+	ProtoGuid KudoGuid = 2;
+	ProtoDateTimeOffset Now = 3;
+}
+
+message PingRequest {	
+}
+
+service Ping {
+	rpc Ping(PingRequest) returns (PingReturn);
+}
+
+*/
