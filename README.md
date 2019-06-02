@@ -17,16 +17,6 @@ Initially I'm going to start with the mono-wasm (also used by the Blazor experim
 
 This is connected to entities via a bidirectional web-socket rpc type arrangment.  Not entirely sure how I'm going to do that yet.   Ultimately the converstion between the server and the entities is a private affair, but we do want to make sure we've provided a robust framework to build on there.
 
+## Kudo
 
-# Polymorphism
-
-## Base Libraries
-
-## Entities
-
-### Prototypes
-### Instances
-
-## Avatars extend Entities
-
-## Worlds  - may be their own creatures, though they do act a bit like Entities in their communication with the baekend server, but these much be much more robust.  Also, the world must interact more vigorously with the browser since the browser will assist with physics and other such things for the world.
+The kudo server is a security server, it handles the certificate chain, authentication, and authorization.
