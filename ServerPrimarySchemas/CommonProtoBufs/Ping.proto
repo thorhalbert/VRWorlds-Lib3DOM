@@ -2,15 +2,15 @@
 
 syntax = "proto3";
 
-package CommonProto;
+package Proto.Common;
 
 import "StandardsProtoBufs/DateTimeOffset.proto";
-import "StandardsProtoBufs/GUID.proto";
+import "StandardsProtoBufs/UUID.proto";
 
 message PingReturn {
-	StandardsProto.ProtoGuid ServerGuid = 1;
-	StandardsProto.ProtoGuid KudoGuid = 2;
-	StandardsProto.ProtoDateTimeOffset Now = 3;
+	Proto.Standards.UUID ServerUuid = 1;
+	Proto.Standards.UUID KudoUuid = 2;
+	Proto.Standards.DateTimeOffset Now = 3;
 }
 
 message PingRequest {	

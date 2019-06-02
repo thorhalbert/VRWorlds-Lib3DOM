@@ -9,7 +9,7 @@ using pb = global::Google.Protobuf;
 using pbc = global::Google.Protobuf.Collections;
 using pbr = global::Google.Protobuf.Reflection;
 using scg = global::System.Collections.Generic;
-namespace CommonProto {
+namespace Proto.Common {
 
   /// <summary>Holder for reflection information generated from CommonProtoBufs/Ping.proto</summary>
   public static partial class PingReflection {
@@ -24,19 +24,19 @@ namespace CommonProto {
     static PingReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChpDb21tb25Qcm90b0J1ZnMvUGluZy5wcm90bxILQ29tbW9uUHJvdG8aJ1N0",
-            "YW5kYXJkc1Byb3RvQnVmcy9EYXRlVGltZU9mZnNldC5wcm90bxodU3RhbmRh",
-            "cmRzUHJvdG9CdWZzL0dVSUQucHJvdG8imgEKClBpbmdSZXR1cm4SLQoKU2Vy",
-            "dmVyR3VpZBgBIAEoCzIZLlN0YW5kYXJkc1Byb3RvLlByb3RvR3VpZBIrCghL",
-            "dWRvR3VpZBgCIAEoCzIZLlN0YW5kYXJkc1Byb3RvLlByb3RvR3VpZBIwCgNO",
-            "b3cYAyABKAsyIy5TdGFuZGFyZHNQcm90by5Qcm90b0RhdGVUaW1lT2Zmc2V0",
-            "Ig0KC1BpbmdSZXF1ZXN0MkEKBFBpbmcSOQoEUGluZxIYLkNvbW1vblByb3Rv",
-            "LlBpbmdSZXF1ZXN0GhcuQ29tbW9uUHJvdG8uUGluZ1JldHVybmIGcHJvdG8z"));
+            "ChpDb21tb25Qcm90b0J1ZnMvUGluZy5wcm90bxIMUHJvdG8uQ29tbW9uGidT",
+            "dGFuZGFyZHNQcm90b0J1ZnMvRGF0ZVRpbWVPZmZzZXQucHJvdG8aHVN0YW5k",
+            "YXJkc1Byb3RvQnVmcy9VVUlELnByb3RvIo4BCgpQaW5nUmV0dXJuEikKClNl",
+            "cnZlclV1aWQYASABKAsyFS5Qcm90by5TdGFuZGFyZHMuVVVJRBInCghLdWRv",
+            "VXVpZBgCIAEoCzIVLlByb3RvLlN0YW5kYXJkcy5VVUlEEiwKA05vdxgDIAEo",
+            "CzIfLlByb3RvLlN0YW5kYXJkcy5EYXRlVGltZU9mZnNldCINCgtQaW5nUmVx",
+            "dWVzdDJDCgRQaW5nEjsKBFBpbmcSGS5Qcm90by5Db21tb24uUGluZ1JlcXVl",
+            "c3QaGC5Qcm90by5Db21tb24uUGluZ1JldHVybmIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-          new pbr::FileDescriptor[] { global::StandardsProto.DateTimeOffsetReflection.Descriptor, global::StandardsProto.GUIDReflection.Descriptor, },
+          new pbr::FileDescriptor[] { global::Proto.Standards.DateTimeOffsetReflection.Descriptor, global::Proto.Standards.UUIDReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::CommonProto.PingReturn), global::CommonProto.PingReturn.Parser, new[]{ "ServerGuid", "KudoGuid", "Now" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::CommonProto.PingRequest), global::CommonProto.PingRequest.Parser, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Proto.Common.PingReturn), global::Proto.Common.PingReturn.Parser, new[]{ "ServerUuid", "KudoUuid", "Now" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Proto.Common.PingRequest), global::Proto.Common.PingRequest.Parser, null, null, null, null)
           }));
     }
     #endregion
@@ -51,7 +51,7 @@ namespace CommonProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::CommonProto.PingReflection.Descriptor.MessageTypes[0]; }
+      get { return global::Proto.Common.PingReflection.Descriptor.MessageTypes[0]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -68,8 +68,8 @@ namespace CommonProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public PingReturn(PingReturn other) : this() {
-      serverGuid_ = other.serverGuid_ != null ? other.serverGuid_.Clone() : null;
-      kudoGuid_ = other.kudoGuid_ != null ? other.kudoGuid_.Clone() : null;
+      serverUuid_ = other.serverUuid_ != null ? other.serverUuid_.Clone() : null;
+      kudoUuid_ = other.kudoUuid_ != null ? other.kudoUuid_.Clone() : null;
       now_ = other.now_ != null ? other.now_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
@@ -79,33 +79,33 @@ namespace CommonProto {
       return new PingReturn(this);
     }
 
-    /// <summary>Field number for the "ServerGuid" field.</summary>
-    public const int ServerGuidFieldNumber = 1;
-    private global::StandardsProto.ProtoGuid serverGuid_;
+    /// <summary>Field number for the "ServerUuid" field.</summary>
+    public const int ServerUuidFieldNumber = 1;
+    private global::Proto.Standards.UUID serverUuid_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::StandardsProto.ProtoGuid ServerGuid {
-      get { return serverGuid_; }
+    public global::Proto.Standards.UUID ServerUuid {
+      get { return serverUuid_; }
       set {
-        serverGuid_ = value;
+        serverUuid_ = value;
       }
     }
 
-    /// <summary>Field number for the "KudoGuid" field.</summary>
-    public const int KudoGuidFieldNumber = 2;
-    private global::StandardsProto.ProtoGuid kudoGuid_;
+    /// <summary>Field number for the "KudoUuid" field.</summary>
+    public const int KudoUuidFieldNumber = 2;
+    private global::Proto.Standards.UUID kudoUuid_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::StandardsProto.ProtoGuid KudoGuid {
-      get { return kudoGuid_; }
+    public global::Proto.Standards.UUID KudoUuid {
+      get { return kudoUuid_; }
       set {
-        kudoGuid_ = value;
+        kudoUuid_ = value;
       }
     }
 
     /// <summary>Field number for the "Now" field.</summary>
     public const int NowFieldNumber = 3;
-    private global::StandardsProto.ProtoDateTimeOffset now_;
+    private global::Proto.Standards.DateTimeOffset now_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::StandardsProto.ProtoDateTimeOffset Now {
+    public global::Proto.Standards.DateTimeOffset Now {
       get { return now_; }
       set {
         now_ = value;
@@ -125,8 +125,8 @@ namespace CommonProto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (!object.Equals(ServerGuid, other.ServerGuid)) return false;
-      if (!object.Equals(KudoGuid, other.KudoGuid)) return false;
+      if (!object.Equals(ServerUuid, other.ServerUuid)) return false;
+      if (!object.Equals(KudoUuid, other.KudoUuid)) return false;
       if (!object.Equals(Now, other.Now)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -134,8 +134,8 @@ namespace CommonProto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (serverGuid_ != null) hash ^= ServerGuid.GetHashCode();
-      if (kudoGuid_ != null) hash ^= KudoGuid.GetHashCode();
+      if (serverUuid_ != null) hash ^= ServerUuid.GetHashCode();
+      if (kudoUuid_ != null) hash ^= KudoUuid.GetHashCode();
       if (now_ != null) hash ^= Now.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -150,13 +150,13 @@ namespace CommonProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public void WriteTo(pb::CodedOutputStream output) {
-      if (serverGuid_ != null) {
+      if (serverUuid_ != null) {
         output.WriteRawTag(10);
-        output.WriteMessage(ServerGuid);
+        output.WriteMessage(ServerUuid);
       }
-      if (kudoGuid_ != null) {
+      if (kudoUuid_ != null) {
         output.WriteRawTag(18);
-        output.WriteMessage(KudoGuid);
+        output.WriteMessage(KudoUuid);
       }
       if (now_ != null) {
         output.WriteRawTag(26);
@@ -170,11 +170,11 @@ namespace CommonProto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (serverGuid_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(ServerGuid);
+      if (serverUuid_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(ServerUuid);
       }
-      if (kudoGuid_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(KudoGuid);
+      if (kudoUuid_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(KudoUuid);
       }
       if (now_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Now);
@@ -190,21 +190,21 @@ namespace CommonProto {
       if (other == null) {
         return;
       }
-      if (other.serverGuid_ != null) {
-        if (serverGuid_ == null) {
-          ServerGuid = new global::StandardsProto.ProtoGuid();
+      if (other.serverUuid_ != null) {
+        if (serverUuid_ == null) {
+          ServerUuid = new global::Proto.Standards.UUID();
         }
-        ServerGuid.MergeFrom(other.ServerGuid);
+        ServerUuid.MergeFrom(other.ServerUuid);
       }
-      if (other.kudoGuid_ != null) {
-        if (kudoGuid_ == null) {
-          KudoGuid = new global::StandardsProto.ProtoGuid();
+      if (other.kudoUuid_ != null) {
+        if (kudoUuid_ == null) {
+          KudoUuid = new global::Proto.Standards.UUID();
         }
-        KudoGuid.MergeFrom(other.KudoGuid);
+        KudoUuid.MergeFrom(other.KudoUuid);
       }
       if (other.now_ != null) {
         if (now_ == null) {
-          Now = new global::StandardsProto.ProtoDateTimeOffset();
+          Now = new global::Proto.Standards.DateTimeOffset();
         }
         Now.MergeFrom(other.Now);
       }
@@ -220,22 +220,22 @@ namespace CommonProto {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 10: {
-            if (serverGuid_ == null) {
-              ServerGuid = new global::StandardsProto.ProtoGuid();
+            if (serverUuid_ == null) {
+              ServerUuid = new global::Proto.Standards.UUID();
             }
-            input.ReadMessage(ServerGuid);
+            input.ReadMessage(ServerUuid);
             break;
           }
           case 18: {
-            if (kudoGuid_ == null) {
-              KudoGuid = new global::StandardsProto.ProtoGuid();
+            if (kudoUuid_ == null) {
+              KudoUuid = new global::Proto.Standards.UUID();
             }
-            input.ReadMessage(KudoGuid);
+            input.ReadMessage(KudoUuid);
             break;
           }
           case 26: {
             if (now_ == null) {
-              Now = new global::StandardsProto.ProtoDateTimeOffset();
+              Now = new global::Proto.Standards.DateTimeOffset();
             }
             input.ReadMessage(Now);
             break;
@@ -254,7 +254,7 @@ namespace CommonProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::CommonProto.PingReflection.Descriptor.MessageTypes[1]; }
+      get { return global::Proto.Common.PingReflection.Descriptor.MessageTypes[1]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

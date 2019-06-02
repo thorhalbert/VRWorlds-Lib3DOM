@@ -9,8 +9,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="KudoProtoBufs\CertificateChain.proto" />
+    <None Remove="StandardsProtoBufs\Certificate.proto" />
     <None Remove="StandardsProtoBufs\DateTimeOffset.proto" />
-    <None Remove="StandardsProtoBufs\GUID.proto" />
+    <None Remove="StandardsProtoBufs\UUID.proto" />
   </ItemGroup>
   
   <ItemGroup>
@@ -25,7 +27,7 @@
   
   <ItemGroup>
     <ProtoBuf Update="StandardsProtoBufs\DateTimeOffset.proto" Access="Public" />
-    <ProtoBuf Update="StandardsProtoBufs\GUID.proto" Access="Public" />
+    <ProtoBuf Update="StandardsProtoBufs\UUID.proto" Access="Public" />
   </ItemGroup>
 
 </Project>

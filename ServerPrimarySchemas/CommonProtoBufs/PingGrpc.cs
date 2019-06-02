@@ -10,32 +10,32 @@
 
 using grpc = global::Grpc.Core;
 
-namespace CommonProto {
+namespace Proto.Common {
   public static partial class Ping
   {
-    static readonly string __ServiceName = "CommonProto.Ping";
+    static readonly string __ServiceName = "Proto.Common.Ping";
 
-    static readonly grpc::Marshaller<global::CommonProto.PingRequest> __Marshaller_CommonProto_PingRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::CommonProto.PingRequest.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::CommonProto.PingReturn> __Marshaller_CommonProto_PingReturn = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::CommonProto.PingReturn.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Proto.Common.PingRequest> __Marshaller_Proto_Common_PingRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Proto.Common.PingRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::Proto.Common.PingReturn> __Marshaller_Proto_Common_PingReturn = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Proto.Common.PingReturn.Parser.ParseFrom);
 
-    static readonly grpc::Method<global::CommonProto.PingRequest, global::CommonProto.PingReturn> __Method_Ping = new grpc::Method<global::CommonProto.PingRequest, global::CommonProto.PingReturn>(
+    static readonly grpc::Method<global::Proto.Common.PingRequest, global::Proto.Common.PingReturn> __Method_Ping = new grpc::Method<global::Proto.Common.PingRequest, global::Proto.Common.PingReturn>(
         grpc::MethodType.Unary,
         __ServiceName,
         "Ping",
-        __Marshaller_CommonProto_PingRequest,
-        __Marshaller_CommonProto_PingReturn);
+        __Marshaller_Proto_Common_PingRequest,
+        __Marshaller_Proto_Common_PingReturn);
 
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
     {
-      get { return global::CommonProto.PingReflection.Descriptor.Services[0]; }
+      get { return global::Proto.Common.PingReflection.Descriptor.Services[0]; }
     }
 
     /// <summary>Base class for server-side implementations of Ping</summary>
     [grpc::BindServiceMethod(typeof(Ping), "BindService")]
     public abstract partial class PingBase
     {
-      public virtual global::System.Threading.Tasks.Task<global::CommonProto.PingReturn> Ping(global::CommonProto.PingRequest request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::Proto.Common.PingReturn> Ping(global::Proto.Common.PingRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -65,19 +65,19 @@ namespace CommonProto {
       {
       }
 
-      public virtual global::CommonProto.PingReturn Ping(global::CommonProto.PingRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual global::Proto.Common.PingReturn Ping(global::Proto.Common.PingRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return Ping(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual global::CommonProto.PingReturn Ping(global::CommonProto.PingRequest request, grpc::CallOptions options)
+      public virtual global::Proto.Common.PingReturn Ping(global::Proto.Common.PingRequest request, grpc::CallOptions options)
       {
         return CallInvoker.BlockingUnaryCall(__Method_Ping, null, options, request);
       }
-      public virtual grpc::AsyncUnaryCall<global::CommonProto.PingReturn> PingAsync(global::CommonProto.PingRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::Proto.Common.PingReturn> PingAsync(global::Proto.Common.PingRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return PingAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncUnaryCall<global::CommonProto.PingReturn> PingAsync(global::CommonProto.PingRequest request, grpc::CallOptions options)
+      public virtual grpc::AsyncUnaryCall<global::Proto.Common.PingReturn> PingAsync(global::Proto.Common.PingRequest request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_Ping, null, options, request);
       }
@@ -102,7 +102,7 @@ namespace CommonProto {
     /// <param name="serviceImpl">An object implementing the server-side handling logic.</param>
     public static void BindService(grpc::ServiceBinderBase serviceBinder, PingBase serviceImpl)
     {
-      serviceBinder.AddMethod(__Method_Ping, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::CommonProto.PingRequest, global::CommonProto.PingReturn>(serviceImpl.Ping));
+      serviceBinder.AddMethod(__Method_Ping, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Proto.Common.PingRequest, global::Proto.Common.PingReturn>(serviceImpl.Ping));
     }
 
   }

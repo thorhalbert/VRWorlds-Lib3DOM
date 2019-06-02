@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Text;
 
 
-namespace StandardsProto
+namespace Proto.Standards
 {
-    public sealed partial class ProtoGuid
+    public sealed partial class UUID
     {
-        public Guid RealGuid
+        public Guid Uuid
         {
             get
             {

@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace StandardsProto
+namespace Proto.Standards
 {
-    public sealed partial class ProtoDateTimeOffset
+    public sealed partial class DateTimeOffset
     {
-        public DateTimeOffset RealDate
+        public System.DateTimeOffset RealDate
         {
             get {
                 var tick = this.Ticks;
                 var offset = this.Offset;
 
-                return new DateTimeOffset(ticks: tick, new TimeSpan(0, offset, 0));         
+                return new System.DateTimeOffset(ticks: tick, new TimeSpan(0, offset, 0));         
             }
             set
             {

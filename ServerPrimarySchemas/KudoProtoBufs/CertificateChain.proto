@@ -1,0 +1,21 @@
+﻿/* Get the Cert chain from the Kudo Server */
+
+syntax = "proto3";
+
+package Proto.Kudo;
+
+import "StandardsProtoBufs/DateTimeOffset.proto";
+import "StandardsProtoBufs/UUID.proto";
+import "StandardsProtoBufs/Certificate.proto";
+
+message CertificateList {
+	repeated Proto.Standards.Certificate CertificateList = 1;
+}
+
+message CertificateRequest {
+	repeated Proto.Standards.UUID CertificateUuids = 1;
+}
+
+service CertificateChain {
+	rpc GetCertificates(CertificateRequest) returns (CertificateList);
+}

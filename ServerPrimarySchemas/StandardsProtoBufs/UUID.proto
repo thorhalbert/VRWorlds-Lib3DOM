@@ -1,7 +1,7 @@
 ﻿syntax = "proto3";
 
-package StandardsProto;
+package Proto.Standards;
 
-message ProtoGuid {
+message UUID {
 	bytes uuidBytes = 1;
 }

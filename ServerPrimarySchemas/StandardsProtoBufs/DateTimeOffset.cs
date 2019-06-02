@@ -9,7 +9,7 @@ using pb = global::Google.Protobuf;
 using pbc = global::Google.Protobuf.Collections;
 using pbr = global::Google.Protobuf.Reflection;
 using scg = global::System.Collections.Generic;
-namespace StandardsProto {
+namespace Proto.Standards {
 
   /// <summary>Holder for reflection information generated from StandardsProtoBufs/DateTimeOffset.proto</summary>
   public static partial class DateTimeOffsetReflection {
@@ -24,28 +24,28 @@ namespace StandardsProto {
     static DateTimeOffsetReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "CidTdGFuZGFyZHNQcm90b0J1ZnMvRGF0ZVRpbWVPZmZzZXQucHJvdG8SDlN0",
-            "YW5kYXJkc1Byb3RvIjQKE1Byb3RvRGF0ZVRpbWVPZmZzZXQSDQoFdGlja3MY",
-            "ASABKAMSDgoGb2Zmc2V0GAIgASgFYgZwcm90bzM="));
+            "CidTdGFuZGFyZHNQcm90b0J1ZnMvRGF0ZVRpbWVPZmZzZXQucHJvdG8SD1By",
+            "b3RvLlN0YW5kYXJkcyIvCg5EYXRlVGltZU9mZnNldBINCgV0aWNrcxgBIAEo",
+            "AxIOCgZvZmZzZXQYAiABKAViBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::StandardsProto.ProtoDateTimeOffset), global::StandardsProto.ProtoDateTimeOffset.Parser, new[]{ "Ticks", "Offset" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Proto.Standards.DateTimeOffset), global::Proto.Standards.DateTimeOffset.Parser, new[]{ "Ticks", "Offset" }, null, null, null)
           }));
     }
     #endregion
 
   }
   #region Messages
-  public sealed partial class ProtoDateTimeOffset : pb::IMessage<ProtoDateTimeOffset> {
-    private static readonly pb::MessageParser<ProtoDateTimeOffset> _parser = new pb::MessageParser<ProtoDateTimeOffset>(() => new ProtoDateTimeOffset());
+  public sealed partial class DateTimeOffset : pb::IMessage<DateTimeOffset> {
+    private static readonly pb::MessageParser<DateTimeOffset> _parser = new pb::MessageParser<DateTimeOffset>(() => new DateTimeOffset());
     private pb::UnknownFieldSet _unknownFields;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public static pb::MessageParser<ProtoDateTimeOffset> Parser { get { return _parser; } }
+    public static pb::MessageParser<DateTimeOffset> Parser { get { return _parser; } }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::StandardsProto.DateTimeOffsetReflection.Descriptor.MessageTypes[0]; }
+      get { return global::Proto.Standards.DateTimeOffsetReflection.Descriptor.MessageTypes[0]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -54,22 +54,22 @@ namespace StandardsProto {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public ProtoDateTimeOffset() {
+    public DateTimeOffset() {
       OnConstruction();
     }
 
     partial void OnConstruction();
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public ProtoDateTimeOffset(ProtoDateTimeOffset other) : this() {
+    public DateTimeOffset(DateTimeOffset other) : this() {
       ticks_ = other.ticks_;
       offset_ = other.offset_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public ProtoDateTimeOffset Clone() {
-      return new ProtoDateTimeOffset(this);
+    public DateTimeOffset Clone() {
+      return new DateTimeOffset(this);
     }
 
     /// <summary>Field number for the "ticks" field.</summary>
@@ -96,11 +96,11 @@ namespace StandardsProto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
-      return Equals(other as ProtoDateTimeOffset);
+      return Equals(other as DateTimeOffset);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public bool Equals(ProtoDateTimeOffset other) {
+    public bool Equals(DateTimeOffset other) {
       if (ReferenceEquals(other, null)) {
         return false;
       }
@@ -159,7 +159,7 @@ namespace StandardsProto {
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public void MergeFrom(ProtoDateTimeOffset other) {
+    public void MergeFrom(DateTimeOffset other) {
       if (other == null) {
         return;
       }

@@ -1,9 +1,8 @@
 ﻿syntax = "proto3";
 
-package StandardsProto;
+package Proto.Standards;
 
-
-message ProtoDateTimeOffset {
+message DateTimeOffset {
 	int64 ticks =1;
 	int32 offset =2;
 }
