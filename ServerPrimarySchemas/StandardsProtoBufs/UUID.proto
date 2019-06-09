@@ -1,6 +1,6 @@
 ﻿syntax = "proto3";
 
-package Proto.Standards;
+package  VRWorlds.Schemas.Proto.Standards;
 
 message UUID {
 	bytes uuidBytes = 1;

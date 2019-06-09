@@ -9,7 +9,7 @@ using pb = global::Google.Protobuf;
 using pbc = global::Google.Protobuf.Collections;
 using pbr = global::Google.Protobuf.Reflection;
 using scg = global::System.Collections.Generic;
-namespace Proto.Common {
+namespace VRWorlds.Schemas.Proto.Common {
 
   /// <summary>Holder for reflection information generated from CommonProtoBufs/Ping.proto</summary>
   public static partial class PingReflection {
@@ -24,19 +24,22 @@ namespace Proto.Common {
     static PingReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChpDb21tb25Qcm90b0J1ZnMvUGluZy5wcm90bxIMUHJvdG8uQ29tbW9uGidT",
-            "dGFuZGFyZHNQcm90b0J1ZnMvRGF0ZVRpbWVPZmZzZXQucHJvdG8aHVN0YW5k",
-            "YXJkc1Byb3RvQnVmcy9VVUlELnByb3RvIo4BCgpQaW5nUmV0dXJuEikKClNl",
-            "cnZlclV1aWQYASABKAsyFS5Qcm90by5TdGFuZGFyZHMuVVVJRBInCghLdWRv",
-            "VXVpZBgCIAEoCzIVLlByb3RvLlN0YW5kYXJkcy5VVUlEEiwKA05vdxgDIAEo",
-            "CzIfLlByb3RvLlN0YW5kYXJkcy5EYXRlVGltZU9mZnNldCINCgtQaW5nUmVx",
-            "dWVzdDJDCgRQaW5nEjsKBFBpbmcSGS5Qcm90by5Db21tb24uUGluZ1JlcXVl",
-            "c3QaGC5Qcm90by5Db21tb24uUGluZ1JldHVybmIGcHJvdG8z"));
+            "ChpDb21tb25Qcm90b0J1ZnMvUGluZy5wcm90bxIdVlJXb3JsZHMuU2NoZW1h",
+            "cy5Qcm90by5Db21tb24aJ1N0YW5kYXJkc1Byb3RvQnVmcy9EYXRlVGltZU9m",
+            "ZnNldC5wcm90bxodU3RhbmRhcmRzUHJvdG9CdWZzL1VVSUQucHJvdG8iwQEK",
+            "ClBpbmdSZXR1cm4SOgoKU2VydmVyVXVpZBgBIAEoCzImLlZSV29ybGRzLlNj",
+            "aGVtYXMuUHJvdG8uU3RhbmRhcmRzLlVVSUQSOAoIS3Vkb1V1aWQYAiABKAsy",
+            "Ji5WUldvcmxkcy5TY2hlbWFzLlByb3RvLlN0YW5kYXJkcy5VVUlEEj0KA05v",
+            "dxgDIAEoCzIwLlZSV29ybGRzLlNjaGVtYXMuUHJvdG8uU3RhbmRhcmRzLkRh",
+            "dGVUaW1lT2Zmc2V0Ig0KC1BpbmdSZXF1ZXN0MmUKBFBpbmcSXQoEUGluZxIq",
+            "LlZSV29ybGRzLlNjaGVtYXMuUHJvdG8uQ29tbW9uLlBpbmdSZXF1ZXN0Giku",
+            "VlJXb3JsZHMuU2NoZW1hcy5Qcm90by5Db21tb24uUGluZ1JldHVybmIGcHJv",
+            "dG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-          new pbr::FileDescriptor[] { global::Proto.Standards.DateTimeOffsetReflection.Descriptor, global::Proto.Standards.UUIDReflection.Descriptor, },
+          new pbr::FileDescriptor[] { global::VRWorlds.Schemas.Proto.Standards.DateTimeOffsetReflection.Descriptor, global::VRWorlds.Schemas.Proto.Standards.UUIDReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Proto.Common.PingReturn), global::Proto.Common.PingReturn.Parser, new[]{ "ServerUuid", "KudoUuid", "Now" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Proto.Common.PingRequest), global::Proto.Common.PingRequest.Parser, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::VRWorlds.Schemas.Proto.Common.PingReturn), global::VRWorlds.Schemas.Proto.Common.PingReturn.Parser, new[]{ "ServerUuid", "KudoUuid", "Now" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::VRWorlds.Schemas.Proto.Common.PingRequest), global::VRWorlds.Schemas.Proto.Common.PingRequest.Parser, null, null, null, null)
           }));
     }
     #endregion
@@ -51,7 +54,7 @@ namespace Proto.Common {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Proto.Common.PingReflection.Descriptor.MessageTypes[0]; }
+      get { return global::VRWorlds.Schemas.Proto.Common.PingReflection.Descriptor.MessageTypes[0]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -81,9 +84,9 @@ namespace Proto.Common {
 
     /// <summary>Field number for the "ServerUuid" field.</summary>
     public const int ServerUuidFieldNumber = 1;
-    private global::Proto.Standards.UUID serverUuid_;
+    private global::VRWorlds.Schemas.Proto.Standards.UUID serverUuid_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Proto.Standards.UUID ServerUuid {
+    public global::VRWorlds.Schemas.Proto.Standards.UUID ServerUuid {
       get { return serverUuid_; }
       set {
         serverUuid_ = value;
@@ -92,9 +95,9 @@ namespace Proto.Common {
 
     /// <summary>Field number for the "KudoUuid" field.</summary>
     public const int KudoUuidFieldNumber = 2;
-    private global::Proto.Standards.UUID kudoUuid_;
+    private global::VRWorlds.Schemas.Proto.Standards.UUID kudoUuid_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Proto.Standards.UUID KudoUuid {
+    public global::VRWorlds.Schemas.Proto.Standards.UUID KudoUuid {
       get { return kudoUuid_; }
       set {
         kudoUuid_ = value;
@@ -103,9 +106,9 @@ namespace Proto.Common {
 
     /// <summary>Field number for the "Now" field.</summary>
     public const int NowFieldNumber = 3;
-    private global::Proto.Standards.DateTimeOffset now_;
+    private global::VRWorlds.Schemas.Proto.Standards.DateTimeOffset now_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Proto.Standards.DateTimeOffset Now {
+    public global::VRWorlds.Schemas.Proto.Standards.DateTimeOffset Now {
       get { return now_; }
       set {
         now_ = value;
@@ -192,19 +195,19 @@ namespace Proto.Common {
       }
       if (other.serverUuid_ != null) {
         if (serverUuid_ == null) {
-          ServerUuid = new global::Proto.Standards.UUID();
+          ServerUuid = new global::VRWorlds.Schemas.Proto.Standards.UUID();
         }
         ServerUuid.MergeFrom(other.ServerUuid);
       }
       if (other.kudoUuid_ != null) {
         if (kudoUuid_ == null) {
-          KudoUuid = new global::Proto.Standards.UUID();
+          KudoUuid = new global::VRWorlds.Schemas.Proto.Standards.UUID();
         }
         KudoUuid.MergeFrom(other.KudoUuid);
       }
       if (other.now_ != null) {
         if (now_ == null) {
-          Now = new global::Proto.Standards.DateTimeOffset();
+          Now = new global::VRWorlds.Schemas.Proto.Standards.DateTimeOffset();
         }
         Now.MergeFrom(other.Now);
       }
@@ -221,21 +224,21 @@ namespace Proto.Common {
             break;
           case 10: {
             if (serverUuid_ == null) {
-              ServerUuid = new global::Proto.Standards.UUID();
+              ServerUuid = new global::VRWorlds.Schemas.Proto.Standards.UUID();
             }
             input.ReadMessage(ServerUuid);
             break;
           }
           case 18: {
             if (kudoUuid_ == null) {
-              KudoUuid = new global::Proto.Standards.UUID();
+              KudoUuid = new global::VRWorlds.Schemas.Proto.Standards.UUID();
             }
             input.ReadMessage(KudoUuid);
             break;
           }
           case 26: {
             if (now_ == null) {
-              Now = new global::Proto.Standards.DateTimeOffset();
+              Now = new global::VRWorlds.Schemas.Proto.Standards.DateTimeOffset();
             }
             input.ReadMessage(Now);
             break;
@@ -254,7 +257,7 @@ namespace Proto.Common {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Proto.Common.PingReflection.Descriptor.MessageTypes[1]; }
+      get { return global::VRWorlds.Schemas.Proto.Common.PingReflection.Descriptor.MessageTypes[1]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

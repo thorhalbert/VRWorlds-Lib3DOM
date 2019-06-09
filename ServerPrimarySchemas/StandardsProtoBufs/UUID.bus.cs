@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 
 
-namespace Proto.Standards
+namespace VRWorlds.Schemas.Proto.Standards
 {
     public sealed partial class UUID
     {

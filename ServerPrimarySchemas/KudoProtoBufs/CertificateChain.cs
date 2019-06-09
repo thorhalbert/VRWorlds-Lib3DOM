@@ -9,7 +9,7 @@ using pb = global::Google.Protobuf;
 using pbc = global::Google.Protobuf.Collections;
 using pbr = global::Google.Protobuf.Reflection;
 using scg = global::System.Collections.Generic;
-namespace Proto.Kudo {
+namespace VRWorlds.Schemas.Proto.Kudo {
 
   /// <summary>Holder for reflection information generated from KudoProtoBufs/CertificateChain.proto</summary>
   public static partial class CertificateChainReflection {
@@ -24,21 +24,23 @@ namespace Proto.Kudo {
     static CertificateChainReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "CiRLdWRvUHJvdG9CdWZzL0NlcnRpZmljYXRlQ2hhaW4ucHJvdG8SClByb3Rv",
-            "Lkt1ZG8aJ1N0YW5kYXJkc1Byb3RvQnVmcy9EYXRlVGltZU9mZnNldC5wcm90",
-            "bxodU3RhbmRhcmRzUHJvdG9CdWZzL1VVSUQucHJvdG8aJFN0YW5kYXJkc1By",
-            "b3RvQnVmcy9DZXJ0aWZpY2F0ZS5wcm90byJICg9DZXJ0aWZpY2F0ZUxpc3QS",
-            "NQoPQ2VydGlmaWNhdGVMaXN0GAEgAygLMhwuUHJvdG8uU3RhbmRhcmRzLkNl",
-            "cnRpZmljYXRlIkUKEkNlcnRpZmljYXRlUmVxdWVzdBIvChBDZXJ0aWZpY2F0",
-            "ZVV1aWRzGAEgAygLMhUuUHJvdG8uU3RhbmRhcmRzLlVVSUQyYgoQQ2VydGlm",
-            "aWNhdGVDaGFpbhJOCg9HZXRDZXJ0aWZpY2F0ZXMSHi5Qcm90by5LdWRvLkNl",
-            "cnRpZmljYXRlUmVxdWVzdBobLlByb3RvLkt1ZG8uQ2VydGlmaWNhdGVMaXN0",
-            "YgZwcm90bzM="));
+            "CiRLdWRvUHJvdG9CdWZzL0NlcnRpZmljYXRlQ2hhaW4ucHJvdG8SG1ZSV29y",
+            "bGRzLlNjaGVtYXMuUHJvdG8uS3VkbxonU3RhbmRhcmRzUHJvdG9CdWZzL0Rh",
+            "dGVUaW1lT2Zmc2V0LnByb3RvGh1TdGFuZGFyZHNQcm90b0J1ZnMvVVVJRC5w",
+            "cm90bxokU3RhbmRhcmRzUHJvdG9CdWZzL0NlcnRpZmljYXRlLnByb3RvIlkK",
+            "D0NlcnRpZmljYXRlTGlzdBJGCg9DZXJ0aWZpY2F0ZUxpc3QYASADKAsyLS5W",
+            "Uldvcmxkcy5TY2hlbWFzLlByb3RvLlN0YW5kYXJkcy5DZXJ0aWZpY2F0ZSJW",
+            "ChJDZXJ0aWZpY2F0ZVJlcXVlc3QSQAoQQ2VydGlmaWNhdGVVdWlkcxgBIAMo",
+            "CzImLlZSV29ybGRzLlNjaGVtYXMuUHJvdG8uU3RhbmRhcmRzLlVVSUQyhAEK",
+            "EENlcnRpZmljYXRlQ2hhaW4ScAoPR2V0Q2VydGlmaWNhdGVzEi8uVlJXb3Js",
+            "ZHMuU2NoZW1hcy5Qcm90by5LdWRvLkNlcnRpZmljYXRlUmVxdWVzdBosLlZS",
+            "V29ybGRzLlNjaGVtYXMuUHJvdG8uS3Vkby5DZXJ0aWZpY2F0ZUxpc3RiBnBy",
+            "b3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-          new pbr::FileDescriptor[] { global::Proto.Standards.DateTimeOffsetReflection.Descriptor, global::Proto.Standards.UUIDReflection.Descriptor, global::Proto.Standards.CertificateReflection.Descriptor, },
+          new pbr::FileDescriptor[] { global::VRWorlds.Schemas.Proto.Standards.DateTimeOffsetReflection.Descriptor, global::VRWorlds.Schemas.Proto.Standards.UUIDReflection.Descriptor, global::VRWorlds.Schemas.Proto.Standards.CertificateReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Proto.Kudo.CertificateList), global::Proto.Kudo.CertificateList.Parser, new[]{ "CertificateList_" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Proto.Kudo.CertificateRequest), global::Proto.Kudo.CertificateRequest.Parser, new[]{ "CertificateUuids" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::VRWorlds.Schemas.Proto.Kudo.CertificateList), global::VRWorlds.Schemas.Proto.Kudo.CertificateList.Parser, new[]{ "CertificateList_" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::VRWorlds.Schemas.Proto.Kudo.CertificateRequest), global::VRWorlds.Schemas.Proto.Kudo.CertificateRequest.Parser, new[]{ "CertificateUuids" }, null, null, null)
           }));
     }
     #endregion
@@ -53,7 +55,7 @@ namespace Proto.Kudo {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Proto.Kudo.CertificateChainReflection.Descriptor.MessageTypes[0]; }
+      get { return global::VRWorlds.Schemas.Proto.Kudo.CertificateChainReflection.Descriptor.MessageTypes[0]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -81,11 +83,11 @@ namespace Proto.Kudo {
 
     /// <summary>Field number for the "CertificateList" field.</summary>
     public const int CertificateList_FieldNumber = 1;
-    private static readonly pb::FieldCodec<global::Proto.Standards.Certificate> _repeated_certificateList_codec
-        = pb::FieldCodec.ForMessage(10, global::Proto.Standards.Certificate.Parser);
-    private readonly pbc::RepeatedField<global::Proto.Standards.Certificate> certificateList_ = new pbc::RepeatedField<global::Proto.Standards.Certificate>();
+    private static readonly pb::FieldCodec<global::VRWorlds.Schemas.Proto.Standards.Certificate> _repeated_certificateList_codec
+        = pb::FieldCodec.ForMessage(10, global::VRWorlds.Schemas.Proto.Standards.Certificate.Parser);
+    private readonly pbc::RepeatedField<global::VRWorlds.Schemas.Proto.Standards.Certificate> certificateList_ = new pbc::RepeatedField<global::VRWorlds.Schemas.Proto.Standards.Certificate>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::Proto.Standards.Certificate> CertificateList_ {
+    public pbc::RepeatedField<global::VRWorlds.Schemas.Proto.Standards.Certificate> CertificateList_ {
       get { return certificateList_; }
     }
 
@@ -174,7 +176,7 @@ namespace Proto.Kudo {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Proto.Kudo.CertificateChainReflection.Descriptor.MessageTypes[1]; }
+      get { return global::VRWorlds.Schemas.Proto.Kudo.CertificateChainReflection.Descriptor.MessageTypes[1]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -202,11 +204,11 @@ namespace Proto.Kudo {
 
     /// <summary>Field number for the "CertificateUuids" field.</summary>
     public const int CertificateUuidsFieldNumber = 1;
-    private static readonly pb::FieldCodec<global::Proto.Standards.UUID> _repeated_certificateUuids_codec
-        = pb::FieldCodec.ForMessage(10, global::Proto.Standards.UUID.Parser);
-    private readonly pbc::RepeatedField<global::Proto.Standards.UUID> certificateUuids_ = new pbc::RepeatedField<global::Proto.Standards.UUID>();
+    private static readonly pb::FieldCodec<global::VRWorlds.Schemas.Proto.Standards.UUID> _repeated_certificateUuids_codec
+        = pb::FieldCodec.ForMessage(10, global::VRWorlds.Schemas.Proto.Standards.UUID.Parser);
+    private readonly pbc::RepeatedField<global::VRWorlds.Schemas.Proto.Standards.UUID> certificateUuids_ = new pbc::RepeatedField<global::VRWorlds.Schemas.Proto.Standards.UUID>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public pbc::RepeatedField<global::Proto.Standards.UUID> CertificateUuids {
+    public pbc::RepeatedField<global::VRWorlds.Schemas.Proto.Standards.UUID> CertificateUuids {
       get { return certificateUuids_; }
     }
 

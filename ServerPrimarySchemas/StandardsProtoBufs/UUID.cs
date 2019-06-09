@@ -9,7 +9,7 @@ using pb = global::Google.Protobuf;
 using pbc = global::Google.Protobuf.Collections;
 using pbr = global::Google.Protobuf.Reflection;
 using scg = global::System.Collections.Generic;
-namespace Proto.Standards {
+namespace VRWorlds.Schemas.Proto.Standards {
 
   /// <summary>Holder for reflection information generated from StandardsProtoBufs/UUID.proto</summary>
   public static partial class UUIDReflection {
@@ -24,12 +24,13 @@ namespace Proto.Standards {
     static UUIDReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "Ch1TdGFuZGFyZHNQcm90b0J1ZnMvVVVJRC5wcm90bxIPUHJvdG8uU3RhbmRh",
-            "cmRzIhkKBFVVSUQSEQoJdXVpZEJ5dGVzGAEgASgMYgZwcm90bzM="));
+            "Ch1TdGFuZGFyZHNQcm90b0J1ZnMvVVVJRC5wcm90bxIgVlJXb3JsZHMuU2No",
+            "ZW1hcy5Qcm90by5TdGFuZGFyZHMiGQoEVVVJRBIRCgl1dWlkQnl0ZXMYASAB",
+            "KAxiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Proto.Standards.UUID), global::Proto.Standards.UUID.Parser, new[]{ "UuidBytes" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::VRWorlds.Schemas.Proto.Standards.UUID), global::VRWorlds.Schemas.Proto.Standards.UUID.Parser, new[]{ "UuidBytes" }, null, null, null)
           }));
     }
     #endregion
@@ -44,7 +45,7 @@ namespace Proto.Standards {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Proto.Standards.UUIDReflection.Descriptor.MessageTypes[0]; }
+      get { return global::VRWorlds.Schemas.Proto.Standards.UUIDReflection.Descriptor.MessageTypes[0]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

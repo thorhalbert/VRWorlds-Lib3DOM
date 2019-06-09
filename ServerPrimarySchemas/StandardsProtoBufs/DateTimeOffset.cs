@@ -9,7 +9,7 @@ using pb = global::Google.Protobuf;
 using pbc = global::Google.Protobuf.Collections;
 using pbr = global::Google.Protobuf.Reflection;
 using scg = global::System.Collections.Generic;
-namespace Proto.Standards {
+namespace VRWorlds.Schemas.Proto.Standards {
 
   /// <summary>Holder for reflection information generated from StandardsProtoBufs/DateTimeOffset.proto</summary>
   public static partial class DateTimeOffsetReflection {
@@ -24,13 +24,13 @@ namespace Proto.Standards {
     static DateTimeOffsetReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "CidTdGFuZGFyZHNQcm90b0J1ZnMvRGF0ZVRpbWVPZmZzZXQucHJvdG8SD1By",
-            "b3RvLlN0YW5kYXJkcyIvCg5EYXRlVGltZU9mZnNldBINCgV0aWNrcxgBIAEo",
-            "AxIOCgZvZmZzZXQYAiABKAViBnByb3RvMw=="));
+            "CidTdGFuZGFyZHNQcm90b0J1ZnMvRGF0ZVRpbWVPZmZzZXQucHJvdG8SIFZS",
+            "V29ybGRzLlNjaGVtYXMuUHJvdG8uU3RhbmRhcmRzIi8KDkRhdGVUaW1lT2Zm",
+            "c2V0Eg0KBXRpY2tzGAEgASgDEg4KBm9mZnNldBgCIAEoBWIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Proto.Standards.DateTimeOffset), global::Proto.Standards.DateTimeOffset.Parser, new[]{ "Ticks", "Offset" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::VRWorlds.Schemas.Proto.Standards.DateTimeOffset), global::VRWorlds.Schemas.Proto.Standards.DateTimeOffset.Parser, new[]{ "Ticks", "Offset" }, null, null, null)
           }));
     }
     #endregion
@@ -45,7 +45,7 @@ namespace Proto.Standards {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Proto.Standards.DateTimeOffsetReflection.Descriptor.MessageTypes[0]; }
+      get { return global::VRWorlds.Schemas.Proto.Standards.DateTimeOffsetReflection.Descriptor.MessageTypes[0]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]

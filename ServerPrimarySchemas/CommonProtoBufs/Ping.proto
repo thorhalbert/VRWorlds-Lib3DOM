@@ -2,7 +2,7 @@
 
 syntax = "proto3";
 
-package Proto.Common;
+package VRWorlds.Schemas.Proto.Common;
 
 import "StandardsProtoBufs/DateTimeOffset.proto";
 import "StandardsProtoBufs/UUID.proto";

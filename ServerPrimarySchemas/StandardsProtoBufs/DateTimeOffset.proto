@@ -1,6 +1,6 @@
 ﻿syntax = "proto3";
 
-package Proto.Standards;
+package  VRWorlds.Schemas.Proto.Standards;
 
 message DateTimeOffset {
 	int64 ticks =1;

@@ -9,7 +9,7 @@ using pb = global::Google.Protobuf;
 using pbc = global::Google.Protobuf.Collections;
 using pbr = global::Google.Protobuf.Reflection;
 using scg = global::System.Collections.Generic;
-namespace Proto.Standards {
+namespace VRWorlds.Schemas.Proto.Standards {
 
   /// <summary>Holder for reflection information generated from StandardsProtoBufs/Certificate.proto</summary>
   public static partial class CertificateReflection {
@@ -24,24 +24,26 @@ namespace Proto.Standards {
     static CertificateReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "CiRTdGFuZGFyZHNQcm90b0J1ZnMvQ2VydGlmaWNhdGUucHJvdG8SD1Byb3Rv",
-            "LlN0YW5kYXJkcxonU3RhbmRhcmRzUHJvdG9CdWZzL0RhdGVUaW1lT2Zmc2V0",
-            "LnByb3RvGh1TdGFuZGFyZHNQcm90b0J1ZnMvVVVJRC5wcm90byKEAwoLQ2Vy",
-            "dGlmaWNhdGUSLgoPQ2VydGlmaWNhdGVVdWlkGAEgASgLMhUuUHJvdG8uU3Rh",
-            "bmRhcmRzLlVVSUQSJwoIUm9vdEd1aWQYAiABKAsyFS5Qcm90by5TdGFuZGFy",
-            "ZHMuVVVJRBIzCghDZXJ0VHlwZRgDIAEoDjIhLlByb3RvLlN0YW5kYXJkcy5D",
-            "ZXJ0aWZpY2F0ZVR5cGVzEhAKCGlzU2lnbmVyGAQgASgIEhgKEERpc3Rpbmd1",
-            "aXNlZE5hbWUYBSABKAkSKQoKU2lnbmVyVXVpZBgGIAEoCzIVLlByb3RvLlN0",
-            "YW5kYXJkcy5VVUlEEhEKCVNpZ25hdHVyZRgHIAEoDBIyCglTdGFydFRpbWUY",
-            "CCABKAsyHy5Qcm90by5TdGFuZGFyZHMuRGF0ZVRpbWVPZmZzZXQSMAoHRW5k",
-            "VGltZRgJIAEoCzIfLlByb3RvLlN0YW5kYXJkcy5EYXRlVGltZU9mZnNldBIX",
-            "Cg9DZXJ0aWZpY2F0ZUJvZHkYCiABKAwqPgoQQ2VydGlmaWNhdGVUeXBlcxII",
-            "CgRST09UEAASEAoMSU5URVJNRURJQVRFEAESDgoKQ09ERVNJR05FUhACYgZw",
-            "cm90bzM="));
+            "CiRTdGFuZGFyZHNQcm90b0J1ZnMvQ2VydGlmaWNhdGUucHJvdG8SIFZSV29y",
+            "bGRzLlNjaGVtYXMuUHJvdG8uU3RhbmRhcmRzGidTdGFuZGFyZHNQcm90b0J1",
+            "ZnMvRGF0ZVRpbWVPZmZzZXQucHJvdG8aHVN0YW5kYXJkc1Byb3RvQnVmcy9V",
+            "VUlELnByb3RvIuoDCgtDZXJ0aWZpY2F0ZRI/Cg9DZXJ0aWZpY2F0ZVV1aWQY",
+            "ASABKAsyJi5WUldvcmxkcy5TY2hlbWFzLlByb3RvLlN0YW5kYXJkcy5VVUlE",
+            "EjgKCFJvb3RHdWlkGAIgASgLMiYuVlJXb3JsZHMuU2NoZW1hcy5Qcm90by5T",
+            "dGFuZGFyZHMuVVVJRBJECghDZXJ0VHlwZRgDIAEoDjIyLlZSV29ybGRzLlNj",
+            "aGVtYXMuUHJvdG8uU3RhbmRhcmRzLkNlcnRpZmljYXRlVHlwZXMSEAoIaXNT",
+            "aWduZXIYBCABKAgSGAoQRGlzdGluZ3Vpc2VkTmFtZRgFIAEoCRI6CgpTaWdu",
+            "ZXJVdWlkGAYgASgLMiYuVlJXb3JsZHMuU2NoZW1hcy5Qcm90by5TdGFuZGFy",
+            "ZHMuVVVJRBIRCglTaWduYXR1cmUYByABKAwSQwoJU3RhcnRUaW1lGAggASgL",
+            "MjAuVlJXb3JsZHMuU2NoZW1hcy5Qcm90by5TdGFuZGFyZHMuRGF0ZVRpbWVP",
+            "ZmZzZXQSQQoHRW5kVGltZRgJIAEoCzIwLlZSV29ybGRzLlNjaGVtYXMuUHJv",
+            "dG8uU3RhbmRhcmRzLkRhdGVUaW1lT2Zmc2V0EhcKD0NlcnRpZmljYXRlQm9k",
+            "eRgKIAEoDCo+ChBDZXJ0aWZpY2F0ZVR5cGVzEggKBFJPT1QQABIQCgxJTlRF",
+            "Uk1FRElBVEUQARIOCgpDT0RFU0lHTkVSEAJiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-          new pbr::FileDescriptor[] { global::Proto.Standards.DateTimeOffsetReflection.Descriptor, global::Proto.Standards.UUIDReflection.Descriptor, },
-          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Proto.Standards.CertificateTypes), }, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Proto.Standards.Certificate), global::Proto.Standards.Certificate.Parser, new[]{ "CertificateUuid", "RootGuid", "CertType", "IsSigner", "DistinguisedName", "SignerUuid", "Signature", "StartTime", "EndTime", "CertificateBody" }, null, null, null)
+          new pbr::FileDescriptor[] { global::VRWorlds.Schemas.Proto.Standards.DateTimeOffsetReflection.Descriptor, global::VRWorlds.Schemas.Proto.Standards.UUIDReflection.Descriptor, },
+          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::VRWorlds.Schemas.Proto.Standards.CertificateTypes), }, new pbr::GeneratedClrTypeInfo[] {
+            new pbr::GeneratedClrTypeInfo(typeof(global::VRWorlds.Schemas.Proto.Standards.Certificate), global::VRWorlds.Schemas.Proto.Standards.Certificate.Parser, new[]{ "CertificateUuid", "RootGuid", "CertType", "IsSigner", "DistinguisedName", "SignerUuid", "Signature", "StartTime", "EndTime", "CertificateBody" }, null, null, null)
           }));
     }
     #endregion
@@ -65,7 +67,7 @@ namespace Proto.Standards {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Proto.Standards.CertificateReflection.Descriptor.MessageTypes[0]; }
+      get { return global::VRWorlds.Schemas.Proto.Standards.CertificateReflection.Descriptor.MessageTypes[0]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -102,9 +104,9 @@ namespace Proto.Standards {
 
     /// <summary>Field number for the "CertificateUuid" field.</summary>
     public const int CertificateUuidFieldNumber = 1;
-    private global::Proto.Standards.UUID certificateUuid_;
+    private global::VRWorlds.Schemas.Proto.Standards.UUID certificateUuid_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Proto.Standards.UUID CertificateUuid {
+    public global::VRWorlds.Schemas.Proto.Standards.UUID CertificateUuid {
       get { return certificateUuid_; }
       set {
         certificateUuid_ = value;
@@ -113,9 +115,9 @@ namespace Proto.Standards {
 
     /// <summary>Field number for the "RootGuid" field.</summary>
     public const int RootGuidFieldNumber = 2;
-    private global::Proto.Standards.UUID rootGuid_;
+    private global::VRWorlds.Schemas.Proto.Standards.UUID rootGuid_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Proto.Standards.UUID RootGuid {
+    public global::VRWorlds.Schemas.Proto.Standards.UUID RootGuid {
       get { return rootGuid_; }
       set {
         rootGuid_ = value;
@@ -124,9 +126,9 @@ namespace Proto.Standards {
 
     /// <summary>Field number for the "CertType" field.</summary>
     public const int CertTypeFieldNumber = 3;
-    private global::Proto.Standards.CertificateTypes certType_ = 0;
+    private global::VRWorlds.Schemas.Proto.Standards.CertificateTypes certType_ = 0;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Proto.Standards.CertificateTypes CertType {
+    public global::VRWorlds.Schemas.Proto.Standards.CertificateTypes CertType {
       get { return certType_; }
       set {
         certType_ = value;
@@ -157,9 +159,9 @@ namespace Proto.Standards {
 
     /// <summary>Field number for the "SignerUuid" field.</summary>
     public const int SignerUuidFieldNumber = 6;
-    private global::Proto.Standards.UUID signerUuid_;
+    private global::VRWorlds.Schemas.Proto.Standards.UUID signerUuid_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Proto.Standards.UUID SignerUuid {
+    public global::VRWorlds.Schemas.Proto.Standards.UUID SignerUuid {
       get { return signerUuid_; }
       set {
         signerUuid_ = value;
@@ -179,9 +181,9 @@ namespace Proto.Standards {
 
     /// <summary>Field number for the "StartTime" field.</summary>
     public const int StartTimeFieldNumber = 8;
-    private global::Proto.Standards.DateTimeOffset startTime_;
+    private global::VRWorlds.Schemas.Proto.Standards.DateTimeOffset startTime_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Proto.Standards.DateTimeOffset StartTime {
+    public global::VRWorlds.Schemas.Proto.Standards.DateTimeOffset StartTime {
       get { return startTime_; }
       set {
         startTime_ = value;
@@ -190,9 +192,9 @@ namespace Proto.Standards {
 
     /// <summary>Field number for the "EndTime" field.</summary>
     public const int EndTimeFieldNumber = 9;
-    private global::Proto.Standards.DateTimeOffset endTime_;
+    private global::VRWorlds.Schemas.Proto.Standards.DateTimeOffset endTime_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::Proto.Standards.DateTimeOffset EndTime {
+    public global::VRWorlds.Schemas.Proto.Standards.DateTimeOffset EndTime {
       get { return endTime_; }
       set {
         endTime_ = value;
@@ -353,13 +355,13 @@ namespace Proto.Standards {
       }
       if (other.certificateUuid_ != null) {
         if (certificateUuid_ == null) {
-          CertificateUuid = new global::Proto.Standards.UUID();
+          CertificateUuid = new global::VRWorlds.Schemas.Proto.Standards.UUID();
         }
         CertificateUuid.MergeFrom(other.CertificateUuid);
       }
       if (other.rootGuid_ != null) {
         if (rootGuid_ == null) {
-          RootGuid = new global::Proto.Standards.UUID();
+          RootGuid = new global::VRWorlds.Schemas.Proto.Standards.UUID();
         }
         RootGuid.MergeFrom(other.RootGuid);
       }
@@ -374,7 +376,7 @@ namespace Proto.Standards {
       }
       if (other.signerUuid_ != null) {
         if (signerUuid_ == null) {
-          SignerUuid = new global::Proto.Standards.UUID();
+          SignerUuid = new global::VRWorlds.Schemas.Proto.Standards.UUID();
         }
         SignerUuid.MergeFrom(other.SignerUuid);
       }
@@ -383,13 +385,13 @@ namespace Proto.Standards {
       }
       if (other.startTime_ != null) {
         if (startTime_ == null) {
-          StartTime = new global::Proto.Standards.DateTimeOffset();
+          StartTime = new global::VRWorlds.Schemas.Proto.Standards.DateTimeOffset();
         }
         StartTime.MergeFrom(other.StartTime);
       }
       if (other.endTime_ != null) {
         if (endTime_ == null) {
-          EndTime = new global::Proto.Standards.DateTimeOffset();
+          EndTime = new global::VRWorlds.Schemas.Proto.Standards.DateTimeOffset();
         }
         EndTime.MergeFrom(other.EndTime);
       }
@@ -409,20 +411,20 @@ namespace Proto.Standards {
             break;
           case 10: {
             if (certificateUuid_ == null) {
-              CertificateUuid = new global::Proto.Standards.UUID();
+              CertificateUuid = new global::VRWorlds.Schemas.Proto.Standards.UUID();
             }
             input.ReadMessage(CertificateUuid);
             break;
           }
           case 18: {
             if (rootGuid_ == null) {
-              RootGuid = new global::Proto.Standards.UUID();
+              RootGuid = new global::VRWorlds.Schemas.Proto.Standards.UUID();
             }
             input.ReadMessage(RootGuid);
             break;
           }
           case 24: {
-            CertType = (global::Proto.Standards.CertificateTypes) input.ReadEnum();
+            CertType = (global::VRWorlds.Schemas.Proto.Standards.CertificateTypes) input.ReadEnum();
             break;
           }
           case 32: {
@@ -435,7 +437,7 @@ namespace Proto.Standards {
           }
           case 50: {
             if (signerUuid_ == null) {
-              SignerUuid = new global::Proto.Standards.UUID();
+              SignerUuid = new global::VRWorlds.Schemas.Proto.Standards.UUID();
             }
             input.ReadMessage(SignerUuid);
             break;
@@ -446,14 +448,14 @@ namespace Proto.Standards {
           }
           case 66: {
             if (startTime_ == null) {
-              StartTime = new global::Proto.Standards.DateTimeOffset();
+              StartTime = new global::VRWorlds.Schemas.Proto.Standards.DateTimeOffset();
             }
             input.ReadMessage(StartTime);
             break;
           }
           case 74: {
             if (endTime_ == null) {
-              EndTime = new global::Proto.Standards.DateTimeOffset();
+              EndTime = new global::VRWorlds.Schemas.Proto.Standards.DateTimeOffset();
             }
             input.ReadMessage(EndTime);
             break;

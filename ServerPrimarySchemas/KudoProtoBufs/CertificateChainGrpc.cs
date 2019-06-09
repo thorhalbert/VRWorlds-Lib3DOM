@@ -10,32 +10,32 @@
 
 using grpc = global::Grpc.Core;
 
-namespace Proto.Kudo {
+namespace VRWorlds.Schemas.Proto.Kudo {
   public static partial class CertificateChain
   {
-    static readonly string __ServiceName = "Proto.Kudo.CertificateChain";
+    static readonly string __ServiceName = "VRWorlds.Schemas.Proto.Kudo.CertificateChain";
 
-    static readonly grpc::Marshaller<global::Proto.Kudo.CertificateRequest> __Marshaller_Proto_Kudo_CertificateRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Proto.Kudo.CertificateRequest.Parser.ParseFrom);
-    static readonly grpc::Marshaller<global::Proto.Kudo.CertificateList> __Marshaller_Proto_Kudo_CertificateList = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Proto.Kudo.CertificateList.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::VRWorlds.Schemas.Proto.Kudo.CertificateRequest> __Marshaller_VRWorlds_Schemas_Proto_Kudo_CertificateRequest = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::VRWorlds.Schemas.Proto.Kudo.CertificateRequest.Parser.ParseFrom);
+    static readonly grpc::Marshaller<global::VRWorlds.Schemas.Proto.Kudo.CertificateList> __Marshaller_VRWorlds_Schemas_Proto_Kudo_CertificateList = grpc::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::VRWorlds.Schemas.Proto.Kudo.CertificateList.Parser.ParseFrom);
 
-    static readonly grpc::Method<global::Proto.Kudo.CertificateRequest, global::Proto.Kudo.CertificateList> __Method_GetCertificates = new grpc::Method<global::Proto.Kudo.CertificateRequest, global::Proto.Kudo.CertificateList>(
+    static readonly grpc::Method<global::VRWorlds.Schemas.Proto.Kudo.CertificateRequest, global::VRWorlds.Schemas.Proto.Kudo.CertificateList> __Method_GetCertificates = new grpc::Method<global::VRWorlds.Schemas.Proto.Kudo.CertificateRequest, global::VRWorlds.Schemas.Proto.Kudo.CertificateList>(
         grpc::MethodType.Unary,
         __ServiceName,
         "GetCertificates",
-        __Marshaller_Proto_Kudo_CertificateRequest,
-        __Marshaller_Proto_Kudo_CertificateList);
+        __Marshaller_VRWorlds_Schemas_Proto_Kudo_CertificateRequest,
+        __Marshaller_VRWorlds_Schemas_Proto_Kudo_CertificateList);
 
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
     {
-      get { return global::Proto.Kudo.CertificateChainReflection.Descriptor.Services[0]; }
+      get { return global::VRWorlds.Schemas.Proto.Kudo.CertificateChainReflection.Descriptor.Services[0]; }
     }
 
     /// <summary>Base class for server-side implementations of CertificateChain</summary>
     [grpc::BindServiceMethod(typeof(CertificateChain), "BindService")]
     public abstract partial class CertificateChainBase
     {
-      public virtual global::System.Threading.Tasks.Task<global::Proto.Kudo.CertificateList> GetCertificates(global::Proto.Kudo.CertificateRequest request, grpc::ServerCallContext context)
+      public virtual global::System.Threading.Tasks.Task<global::VRWorlds.Schemas.Proto.Kudo.CertificateList> GetCertificates(global::VRWorlds.Schemas.Proto.Kudo.CertificateRequest request, grpc::ServerCallContext context)
       {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
@@ -65,19 +65,19 @@ namespace Proto.Kudo {
       {
       }
 
-      public virtual global::Proto.Kudo.CertificateList GetCertificates(global::Proto.Kudo.CertificateRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual global::VRWorlds.Schemas.Proto.Kudo.CertificateList GetCertificates(global::VRWorlds.Schemas.Proto.Kudo.CertificateRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return GetCertificates(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual global::Proto.Kudo.CertificateList GetCertificates(global::Proto.Kudo.CertificateRequest request, grpc::CallOptions options)
+      public virtual global::VRWorlds.Schemas.Proto.Kudo.CertificateList GetCertificates(global::VRWorlds.Schemas.Proto.Kudo.CertificateRequest request, grpc::CallOptions options)
       {
         return CallInvoker.BlockingUnaryCall(__Method_GetCertificates, null, options, request);
       }
-      public virtual grpc::AsyncUnaryCall<global::Proto.Kudo.CertificateList> GetCertificatesAsync(global::Proto.Kudo.CertificateRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      public virtual grpc::AsyncUnaryCall<global::VRWorlds.Schemas.Proto.Kudo.CertificateList> GetCertificatesAsync(global::VRWorlds.Schemas.Proto.Kudo.CertificateRequest request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
       {
         return GetCertificatesAsync(request, new grpc::CallOptions(headers, deadline, cancellationToken));
       }
-      public virtual grpc::AsyncUnaryCall<global::Proto.Kudo.CertificateList> GetCertificatesAsync(global::Proto.Kudo.CertificateRequest request, grpc::CallOptions options)
+      public virtual grpc::AsyncUnaryCall<global::VRWorlds.Schemas.Proto.Kudo.CertificateList> GetCertificatesAsync(global::VRWorlds.Schemas.Proto.Kudo.CertificateRequest request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_GetCertificates, null, options, request);
       }
@@ -102,7 +102,7 @@ namespace Proto.Kudo {
     /// <param name="serviceImpl">An object implementing the server-side handling logic.</param>
     public static void BindService(grpc::ServiceBinderBase serviceBinder, CertificateChainBase serviceImpl)
     {
-      serviceBinder.AddMethod(__Method_GetCertificates, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Proto.Kudo.CertificateRequest, global::Proto.Kudo.CertificateList>(serviceImpl.GetCertificates));
+      serviceBinder.AddMethod(__Method_GetCertificates, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::VRWorlds.Schemas.Proto.Kudo.CertificateRequest, global::VRWorlds.Schemas.Proto.Kudo.CertificateList>(serviceImpl.GetCertificates));
     }
 
   }
