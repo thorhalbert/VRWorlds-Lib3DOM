@@ -41,6 +41,7 @@
 // limitations under the License.
 
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Grpc.Core;
 
@@ -57,7 +58,9 @@ namespace VRWorlds.Microservices.Kudo.Vouch
 
         private PingReturn doRequest(PingRequest request)
         {
-            throw new NotImplementedException();
+            var ret = new PingReturn();
+
+            return ret;
         }
     }
 
@@ -70,13 +73,14 @@ namespace VRWorlds.Microservices.Kudo.Vouch
             var server = new Grpc.Core.Server()
             {
                 Services = { Ping.BindService(new PingImpl()) },
-                Ports = { new ServerPort("localhost", Port, ServerCredentials.Insecure) }
+                Ports = { new ServerPort("0.0.0.0", Port, ServerCredentials.Insecure) }
             };
             server.Start();
 
             Console.WriteLine("Greeter server listening on port " + Port);
-            Console.WriteLine("Press any key to stop the server...");
-            Console.ReadKey();
+
+            while (true)
+                Thread.Sleep(10000);
 
             server.ShutdownAsync().Wait();
         }
