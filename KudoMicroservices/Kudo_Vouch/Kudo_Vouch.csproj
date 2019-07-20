@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <RootNamespace>VRWorlds.Microservices.Kudo</RootNamespace>
+    <Configurations>Debug;Release;NET46</Configurations>
   </PropertyGroup>
 
   <ItemGroup>

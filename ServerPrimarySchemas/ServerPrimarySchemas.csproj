@@ -3,6 +3,19 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <RootNamespace>VRWorlds.Schemas</RootNamespace>
+    <Configurations>Debug;Release;NET46</Configurations>
+    <PackageId>VRWorlds.Schemas</PackageId>
+    <Authors>Thor Halbert</Authors>
+    <Product>VRWorlds System</Product>
+    <Description>Standard gRPC schemas and calls for the VRWorlds libraries.
+</Description>
+    <Copyright>2019</Copyright>
+    <PackageProjectUrl>https://thorhalbert-vrworlds.blogspot.com/</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/thorhalbert/VRWorlds-Lib3DOM</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>VR, VRWorlds</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
