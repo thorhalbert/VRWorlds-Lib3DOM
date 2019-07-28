@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>VRWorlds.Common</RootNamespace>
-    <AssemblyName>VRWorlds.Common</AssemblyName>
+    <AssemblyName>VRWorlds Common Logic</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>

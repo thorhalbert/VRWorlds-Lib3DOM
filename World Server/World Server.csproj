@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <RootNamespace>VRWorlds.ServerCommon</RootNamespace>
-    <AssemblyName>VRWorlds Common Server Logic</AssemblyName>
+    <RootNamespace>VRWorlds.ServerLogic.World</RootNamespace>
+    <AssemblyName>VRWorlds World Server Logic</AssemblyName>
   </PropertyGroup>
 
 </Project>

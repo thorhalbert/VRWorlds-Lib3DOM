@@ -3,6 +3,11 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>Browser_Common</RootNamespace>
+    <AssemblyName>VRWorlds Common Browser Logic</AssemblyName>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ClearScript.Manager" Version="1.3.5.28084" />
+  </ItemGroup>
 
 </Project>
