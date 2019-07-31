@@ -1,4 +1,4 @@
-﻿Contents:
+﻿Contents (Brwoser Common):
 
  * Emissary Environment (V8-Clearscript)
  * Login to Avatar/Kudo Server
@@ -8,3 +8,7 @@
  * Mesh Cache Client
  * Load info to verify CA certificate chain
  * Manage Avatars/Aspects/Kudos/Visas
+ * Expose 3DOM API
+ * Sandbox Entity Objects
+ * Manage World - get updates on all changes
+ * Load "Geohashed" world.   Scene Loader
