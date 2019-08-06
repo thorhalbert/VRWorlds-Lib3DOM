@@ -1,6 +1,7 @@
-﻿Contents (Brwoser Common .nET Framework):
+﻿Contents (Brwoser Common .nET Standard):
 
-This is the .net framework version, which I think is not going to be used.
+I've got to play with frameworks to get this right.  I'm concerned that .net standard can't do Clearscript properly.  If I can load it on the browser side I can connect to it with reflection and a nice interface.
+And .net standard is the future.   
 
  * Emissary Environment (V8-Clearscript)
  * Login to Avatar/Kudo Server

@@ -1,9 +1,15 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>VRWorlds.ServerCommon</RootNamespace>
     <AssemblyName>VRWorlds Common Server Logic</AssemblyName>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Glory.Provider.DataCache.Redis.Core" Version="0.9.3" />
+    <PackageReference Include="Glory.Provider.DataStore.MongoDB.Core" Version="0.9.3" />
+    <PackageReference Include="Glory.Provider.EventQueue.RabbitMQ.Core" Version="0.9.3" />
+  </ItemGroup>
 
 </Project>
