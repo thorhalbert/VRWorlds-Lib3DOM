@@ -15,3 +15,5 @@ And .net standard is the future.
  * Sandbox Entity Objects
  * Manage World - get updates on all changes
  * Load "Geohashed" world.   Scene Loader
+
+ * Interbrowser logging

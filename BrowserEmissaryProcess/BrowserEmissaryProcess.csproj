@@ -50,5 +50,11 @@
     <None Include="App.config" />
     <None Include="Readme.md" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Browser Standard Common\Browser Standard Common.csproj">
+      <Project>{87edf122-0967-4d4e-b4fe-73a509f197f4}</Project>
+      <Name>Browser Standard Common</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
