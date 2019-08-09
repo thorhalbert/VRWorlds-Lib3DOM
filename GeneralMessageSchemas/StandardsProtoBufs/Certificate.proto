@@ -1,0 +1,30 @@
+﻿syntax = "proto3";
+
+package  VRWorlds.Schemas.General.Standards;
+
+import "StandardsProtoBufs/DateTimeOffset.proto";
+import "StandardsProtoBufs/UUID.proto";
+
+enum CertificateTypes {
+	ROOT = 0;
+	INTERMEDIATE = 1;
+	CODESIGNER = 2;
+}
+
+message Certificate {
+	Proto.Standards.UUID CertificateUuid = 1;
+	Proto.Standards.UUID RootGuid = 2;
+
+	CertificateTypes CertType = 3;
+	bool isSigner = 4;
+
+	string DistinguisedName = 5;
+
+	Proto.Standards.UUID SignerUuid = 6;
+	bytes Signature = 7;
+
+	Proto.Standards.DateTimeOffset StartTime = 8;
+	Proto.Standards.DateTimeOffset EndTime = 9;
+	
+	bytes CertificateBody = 10;
+}

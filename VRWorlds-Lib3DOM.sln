@@ -56,6 +56,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Browser Logic", "Browser Lo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrowserEmissaryProcess", "BrowserEmissaryProcess\BrowserEmissaryProcess.csproj", "{2967FAF8-9B40-4154-802D-5D0931BA9A47}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeneralMessageSchemas", "GeneralMessageSchemas\GeneralMessageSchemas.csproj", "{D71573EB-569D-423F-A7B2-2AD62901C0FC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -134,6 +136,12 @@ Global
 		{2967FAF8-9B40-4154-802D-5D0931BA9A47}.NET46|Any CPU.Build.0 = Release|Any CPU
 		{2967FAF8-9B40-4154-802D-5D0931BA9A47}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2967FAF8-9B40-4154-802D-5D0931BA9A47}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D71573EB-569D-423F-A7B2-2AD62901C0FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D71573EB-569D-423F-A7B2-2AD62901C0FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D71573EB-569D-423F-A7B2-2AD62901C0FC}.NET46|Any CPU.ActiveCfg = Debug|Any CPU
+		{D71573EB-569D-423F-A7B2-2AD62901C0FC}.NET46|Any CPU.Build.0 = Debug|Any CPU
+		{D71573EB-569D-423F-A7B2-2AD62901C0FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D71573EB-569D-423F-A7B2-2AD62901C0FC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -150,6 +158,7 @@ Global
 		{72B237B4-276B-4D07-B7FB-5E247AA7A9BE} = {35E344D8-5107-45E5-AEB6-9A82E3971998}
 		{87EDF122-0967-4D4E-B4FE-73A509F197F4} = {35E344D8-5107-45E5-AEB6-9A82E3971998}
 		{2967FAF8-9B40-4154-802D-5D0931BA9A47} = {E6864262-B89A-4778-8DFF-D228CAC68BBE}
+		{D71573EB-569D-423F-A7B2-2AD62901C0FC} = {35E344D8-5107-45E5-AEB6-9A82E3971998}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9955A4E7-D8B7-473C-98A6-E72DFDFB4624}
