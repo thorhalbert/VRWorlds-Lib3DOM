@@ -1,0 +1,21 @@
+﻿/* Common Ping Service (prototype) */
+
+syntax = "proto3";
+
+package VRWorlds.Schemas.Gemeral.Common;
+
+import "StandardsProtoBufs/DateTimeOffset.proto";
+import "StandardsProtoBufs/UUID.proto";
+
+message PingReturn {
+	Proto.Standards.UUID ServerUuid = 1;
+	Proto.Standards.UUID KudoUuid = 2;
+	Proto.Standards.DateTimeOffset Now = 3;
+}
+
+message PingRequest {	
+}
+
+service Ping {
+	rpc Ping(PingRequest) returns (PingReturn);
+}
