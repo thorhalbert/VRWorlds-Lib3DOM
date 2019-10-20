@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>VRWorlds.ServerLogic.Entity</RootNamespace>
+    <AssemblyName>VRWorlds Entity Server Logic</AssemblyName>
+  </PropertyGroup>
+
+</Project>

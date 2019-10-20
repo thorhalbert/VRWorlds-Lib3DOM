@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>VRWorlds.ServerCommon</RootNamespace>
+    <AssemblyName>VRWorlds Common Server Logic</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="dotnet-etcd" Version="2.3.1" />
+    <PackageReference Include="Glory.Provider.DataCache.Redis.Core" Version="0.9.3" />
+    <PackageReference Include="Glory.Provider.DataStore.MongoDB.Core" Version="0.9.3" />
+    <PackageReference Include="Glory.Provider.EventQueue.RabbitMQ.Core" Version="0.9.3" />
+    <PackageReference Include="StackExchange.Redis" Version="2.0.601" />
+  </ItemGroup>
+
+</Project>

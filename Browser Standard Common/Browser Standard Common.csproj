@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>VRWorlds.Browser.Common</RootNamespace>
+    <AssemblyName>VRWorlds Browser Common</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="protobuf" Version="2.6.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GeneralMessageSchemas\GeneralMessageSchemas.csproj" />
+  </ItemGroup>
+
+</Project>

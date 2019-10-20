@@ -3,10 +3,13 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.1</TargetFramework>
+    <Configurations>Debug;Release;NET46</Configurations>
+    <AssemblyName>VRWorlds Create Signed Emissary Tool</AssemblyName>
+    <RootNamespace>VRWorlds.Tools.CreateSignedEmissary</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Common\Common.csproj" />
+    <ProjectReference Include="..\..\General Common\General Common.csproj" />
   </ItemGroup>
 
 </Project>
