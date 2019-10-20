@@ -13,25 +13,35 @@ namespace BrowserEmissaryProcess
             public bool Verbose { get; set; }
 
             [Option("processor-guid", Required = true, HelpText = "")]
-            public Guid OurUuid { get; private set; } = Guid.Empty;
+            public Guid ProcessorGuid { get; private set; } = Guid.Empty;
 
             [Option("processor-role", Required = true, HelpText = "")]
-            public string Role { get; set; }
+            public string ProcessorRole { get; set; }
+
+            [Option("grpc-ingress-uri", Required = true, HelpText = "")]
+            public string GrpcIngress { get; set; }
 
             [Option("logger-processor", Required = true, HelpText = "")]
-            public string LogPipeName { get; private set; }
-            public NamedPipeClientStream LogPipe { get; private set; }
+            public string LoggerGuid { get; private set; }
+
+            [Option("logger-uri", Required = true, HelpText = "")]
+            public string LoggerUri { get; private set; }
         }
-
-
 
         static void Main(string[] args)
         {
 
             Parser.Default.ParseArguments<Options>(args);
 
+            // Get our auth token from the environment
 
+            // Open the GRPC connection to the ingress-uri (which is the browser, or a server)
+            // Authenticate
 
+            // Register ourselves
+
+            // Go into processing loop
+                // Ping
         }
 
 
