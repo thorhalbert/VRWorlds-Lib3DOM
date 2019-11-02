@@ -7,6 +7,8 @@
 
   <ItemGroup>
     <PackageReference Include="Grpc.Core" Version="1.21.0" />
+    <PackageReference Include="Microsoft.Owin.Security.OAuth" Version="4.0.1" />
+    <PackageReference Include="System.Security.Cryptography.OpenSsl" Version="4.5.1" />
   </ItemGroup>
 
   <ItemGroup>
