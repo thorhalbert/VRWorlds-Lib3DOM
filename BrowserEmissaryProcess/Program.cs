@@ -5,6 +5,7 @@ using VRWorlds.Browser.Common;
 using Serilog;
 using System.Collections.Generic;
 using System.Text;
+using Grpc.Core;
 
 namespace BrowserEmissaryProcess
 {
@@ -93,10 +94,14 @@ namespace BrowserEmissaryProcess
                 // Open the GRPC connection to the ingress-uri (which is the browser, or a server)
                 // Authenticate
 
+                AttachToBrowser();
+
                 // Register ourselves
 
                 // Go into processing loop
                 // Ping
+
+                PingLoop();
             }
             catch (Exception ex)
             {
@@ -130,6 +135,23 @@ namespace BrowserEmissaryProcess
             Log.Information("Ingress URI: " + opts.GrpcIngress);
 
             
+        }
+
+        private static Channel _GRPCChannel;
+
+        private static void AttachToBrowser()
+        {
+            // Ultimatley we want to use the shared token in ACCESS_TOKEN for authentication
+            // Likely not how this works at all
+            //var creds = ChannelCredentials.Create()
+
+            _GRPCChannel = new Channel(_workingOptions.GrpcIngress, ChannelCredentials.Insecure);
+                
+        }
+
+        private void PingLoop()
+        {
+            var ping = new Ping.
         }
     }
 }
