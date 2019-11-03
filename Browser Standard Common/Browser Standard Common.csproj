@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProtoBuf Include="**/*.proto" OutputDir="%(RelativeDir)" CompileOutputs="false" GrpcServices="Both" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Grpc" Version="2.24.0" />
     <PackageReference Include="Grpc.Auth" Version="2.24.0" />
     <PackageReference Include="Grpc.Core" Version="2.24.0" />
