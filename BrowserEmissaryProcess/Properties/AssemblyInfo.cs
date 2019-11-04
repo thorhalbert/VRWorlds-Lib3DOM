@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("BrowserEmissaryProcess")]
+[assembly: AssemblyTitle("VRWorlds - Browser Emissary Process")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Microsoft")]
-[assembly: AssemblyProduct("BrowserEmissaryProcess")]
-[assembly: AssemblyCopyright("Copyright © Microsoft 2019")]
+[assembly: AssemblyCompany("VRWorlds - Thor Halbert")]
+[assembly: AssemblyProduct("VRWorlds - Browser Emissary Process")]
+[assembly: AssemblyCopyright("Copyright © Thor Halbert 2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

@@ -11,6 +11,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="VRBrowserCommonGRPCProtos\BrowserInterop\ConnectEmissary.proto" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Grpc" Version="2.24.0" />
     <PackageReference Include="Grpc.Auth" Version="2.24.0" />
     <PackageReference Include="Grpc.Core" Version="2.24.0" />

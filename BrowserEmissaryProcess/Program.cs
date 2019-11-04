@@ -15,6 +15,13 @@ namespace BrowserEmissaryProcess
 {
     class Program
     {
+        public enum RoleTypes
+        {
+            Entity,
+            World,
+            Avatar
+        }
+
         public static class ProcessorRoles
         {
             public static readonly Guid DedicatedAvatar = new Guid("195F9EAD-909B-485B-A671-0EC7E97B4CFE");
@@ -34,7 +41,7 @@ namespace BrowserEmissaryProcess
             public Guid ProcessorGuid { get; private set; } = Guid.Empty;
 
             [Option("processor-role", Required = true, HelpText = "")]
-            public string ProcessorRole { get; set; }
+            public Guid ProcessorRole { get; set; }
 
             [Option("grpc-ingress-uri", Required = true, HelpText = "")]
             public string GrpcIngress { get; set; }
@@ -50,19 +57,22 @@ namespace BrowserEmissaryProcess
         private static Guid _AccessToken;
         private static Guid _BrowserSession;
 
+        private static RoleTypes EmissaryRole;
+        private static bool EmissaryDedicated;
+        private static string EmissaryLog;
+
         class EmissaryIdEnricher : ILogEventEnricher
         {
             public void Enrich(LogEvent logEvent, ILogEventPropertyFactory propertyFactory)
             {
-                if (_workingOptions != null)
-                {
-                    logEvent.AddPropertyIfAbsent(propertyFactory.CreateProperty("EmissaryId", _workingOptions.ProcessorGuid));
-                }
+                logEvent.AddPropertyIfAbsent(propertyFactory.CreateProperty("EmissaryId", _workingOptions.ProcessorGuid));
+                logEvent.AddPropertyIfAbsent(propertyFactory.CreateProperty("EmissaryCode", EmissaryLog));
             }
         }
 
         static void Main(string[] args)
         {
+            // Log stuff up to the point where we know our id, then redo the logging format
             Log.Logger = new LoggerConfiguration()
                 .WriteTo.File(@"C:\Temp\BrowserEmissaryProcess.log", shared: true)
                 .MinimumLevel.Verbose()
@@ -74,10 +84,6 @@ namespace BrowserEmissaryProcess
                 sb.Append(a); sb.Append("  ");
             }
 
-            Log.Information("Starting Up: " + sb.ToString());
-
-
-
             try
             {
                 Parser.Default.ParseArguments<Options>(args)
@@ -86,10 +92,36 @@ namespace BrowserEmissaryProcess
 
                 Log.CloseAndFlush();
 
+                // Can't do this as a case statement -- irritating
+                if (_workingOptions.ProcessorRole.Equals(ProcessorRoles.DedicatedAvatar))
+                {
+                    EmissaryRole = RoleTypes.Avatar;
+                    EmissaryDedicated = true;
+                    EmissaryLog = "D-AVATAR";
+                }
+                if (_workingOptions.ProcessorRole.Equals(ProcessorRoles.DedicatedWorld))
+                {
+                    EmissaryRole = RoleTypes.World;
+                    EmissaryDedicated = true;
+                    EmissaryLog = "D-WORLDS";
+                }
+                if (_workingOptions.ProcessorRole.Equals(ProcessorRoles.DedicatedEntity))
+                {
+                    EmissaryRole = RoleTypes.Entity;
+                    EmissaryDedicated = true;
+                    EmissaryLog = "D-ENTITY";
+                }
+                if (_workingOptions.ProcessorRole.Equals(ProcessorRoles.MeldedEntity))
+                {
+                    EmissaryRole = RoleTypes.Entity;
+                    EmissaryDedicated = false;
+                    EmissaryLog = "G-ENTITY";
+                }
+
                 // Reestablish the logger with the emissary id
                 Log.Logger = new LoggerConfiguration()
                   .Enrich.With(new EmissaryIdEnricher())
-                  .WriteTo.File(@"C:\Temp\BrowserEmissaryProcess.log", shared: true)
+                  .WriteTo.File(@"C:\Temp\BrowserEmissaryProcess.log", outputTemplate: "[{Timestamp:HH:mm:ss} {EmissaryId}-{EmissaryCode} {Level:u3}] {Message:lj}{NewLine}{Exception}", shared: true)
                   .MinimumLevel.Verbose()
                   .CreateLogger();
 
@@ -130,7 +162,7 @@ namespace BrowserEmissaryProcess
             }
             catch (Exception ex)
             {
-                Log.Error(ex, "Uncaught error in main loop");
+                Log.Error(ex, "Uncaught error in main loop - started as: "+sb.ToString());
             }
             finally
             {
@@ -179,9 +211,11 @@ namespace BrowserEmissaryProcess
 
             while (true)
             {
-                Log.Information("Send Ping");
+                var bef = DateTime.Now.Ticks;
                 var reply = ping.Ping(new PingRequest());
-                Log.Information("Send Ping Returns");
+                var aft = DateTime.Now.Ticks;
+                
+                Log.Information("Ping: ("+(aft-bef).ToString()+" ns)");
 
                 Thread.Sleep(60000);
             }
