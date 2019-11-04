@@ -6,6 +6,10 @@ using Serilog;
 using System.Collections.Generic;
 using System.Text;
 using Grpc.Core;
+using VRWorlds.Schemas.Browser.Common;
+using System.Threading;
+using Serilog.Core;
+using Serilog.Events;
 
 namespace BrowserEmissaryProcess
 {
@@ -46,10 +50,21 @@ namespace BrowserEmissaryProcess
         private static Guid _AccessToken;
         private static Guid _BrowserSession;
 
+        class EmissaryIdEnricher : ILogEventEnricher
+        {
+            public void Enrich(LogEvent logEvent, ILogEventPropertyFactory propertyFactory)
+            {
+                if (_workingOptions != null)
+                {
+                    logEvent.AddPropertyIfAbsent(propertyFactory.CreateProperty("EmissaryId", _workingOptions.ProcessorGuid));
+                }
+            }
+        }
+
         static void Main(string[] args)
         {
             Log.Logger = new LoggerConfiguration()
-                .WriteTo.File(@"C:\Temp\BrowserEmissaryProcess.log")
+                .WriteTo.File(@"C:\Temp\BrowserEmissaryProcess.log", shared: true)
                 .MinimumLevel.Verbose()
                 .CreateLogger();
 
@@ -61,12 +76,22 @@ namespace BrowserEmissaryProcess
 
             Log.Information("Starting Up: " + sb.ToString());
 
+
+
             try
             {
-
                 Parser.Default.ParseArguments<Options>(args)
                      .WithParsed<Options>(opts => RunOptionsAndReturnExitCode(opts))
                      .WithNotParsed<Options>(errs => HandleParserError(errs));
+
+                Log.CloseAndFlush();
+
+                // Reestablish the logger with the emissary id
+                Log.Logger = new LoggerConfiguration()
+                  .Enrich.With(new EmissaryIdEnricher())
+                  .WriteTo.File(@"C:\Temp\BrowserEmissaryProcess.log", shared: true)
+                  .MinimumLevel.Verbose()
+                  .CreateLogger();
 
                 // Get our auth token from the environment
 
@@ -88,7 +113,7 @@ namespace BrowserEmissaryProcess
                 _AccessToken = new Guid(access_token);
                 _BrowserSession = new Guid(browser_session);
 
-                Log.Information("Access Token: " +_AccessToken.ToString());
+                Log.Information("Access Token: " + _AccessToken.ToString());
                 Log.Information("Browser Session: " + _BrowserSession.ToString());
 
                 // Open the GRPC connection to the ingress-uri (which is the browser, or a server)
@@ -134,7 +159,6 @@ namespace BrowserEmissaryProcess
             Log.Information("Processor Role: " + opts.ProcessorRole.ToString());
             Log.Information("Ingress URI: " + opts.GrpcIngress);
 
-            
         }
 
         private static Channel _GRPCChannel;
@@ -146,12 +170,21 @@ namespace BrowserEmissaryProcess
             //var creds = ChannelCredentials.Create()
 
             _GRPCChannel = new Channel(_workingOptions.GrpcIngress, ChannelCredentials.Insecure);
-                
+
         }
 
-        private void PingLoop()
+        private static void PingLoop()
         {
-            var ping = new Ping.
+            var ping = new Ping.PingClient(_GRPCChannel);
+
+            while (true)
+            {
+                Log.Information("Send Ping");
+                var reply = ping.Ping(new PingRequest());
+                Log.Information("Send Ping Returns");
+
+                Thread.Sleep(60000);
+            }
         }
     }
 }
