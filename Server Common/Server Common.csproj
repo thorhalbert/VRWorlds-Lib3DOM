@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
     <RootNamespace>VRWorlds.ServerCommon</RootNamespace>
     <AssemblyName>VRWorlds Common Server Logic</AssemblyName>
   </PropertyGroup>
