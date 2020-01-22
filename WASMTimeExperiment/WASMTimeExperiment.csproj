@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="JavaScriptEngineSwitcher.V8" Version="3.1.6" />
+    <PackageReference Include="Wasmtime" Version="0.8.0-preview2" />
   </ItemGroup>
 
 </Project>
