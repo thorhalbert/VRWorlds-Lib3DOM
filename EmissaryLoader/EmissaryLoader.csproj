@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="fromGithub\LDraw_Importer_Unity-master\**" />
+    <EmbeddedResource Remove="fromGithub\LDraw_Importer_Unity-master\**" />
+    <None Remove="fromGithub\LDraw_Importer_Unity-master\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Unity3D" Version="1.5.0" />
+    <PackageReference Include="WasmerSharp" Version="0.7.0" />
+    <PackageReference Include="YamlDotNet" Version="8.1.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="fromGithub\" />
+  </ItemGroup>
+
+</Project>

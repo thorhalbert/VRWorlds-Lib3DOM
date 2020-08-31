@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+package  VRWorlds.Schemas.Browser;
+
+// This message is assembled and send to the emissary controller from the 'main' in the emissary.
+// This will be wrapped in a crate.   Emissary also attaches/subscribes to a given set of callbacks.
+// (Protobuf can't actually store a pointer to a function, but Rust can do that--this is mostly just
+// setting a set of bits)
+
+import "UUID.proto";
+
+/*
+EmissaryInitialize
+  Called from ‘main’
+
+Identity block
+    Emissary Manufacturer
+    Manufacturer GUID
+    Name of Emissary
+    Emissary GUID
+    Version of Emissary
+    Version GUID
+Callbacks Subscriptions
+    Callback type
+        Initiate prototype - creates prototype internally
+        Initiate entity - returns mesh and platonic solids/textures
+        Refresh tick - returns deltas
+        Collision
+        Interaction
+        Destroy entity
+        Callback handler
+Config
+    Desired Tick Interval
+    Server Connection Setup
+    Private Arguments
+Service Callbacks
+    Service Callback Processor call/callback (these can’t be strongly typed like above) since this is private com between server and emissary — it’s assumed to be protobuf, but doesn’t have to be.
+*/
+
+message EmissaryInitialize {
+    message Identity {  j   }
+    message CallBacks {}
+    message Config {}
+    message ServiceCallBacks {}
+}

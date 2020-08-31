@@ -9,6 +9,11 @@ namespace EmissaryWebAssembly
     {
         public Instance Instance { get; set; }
 
+        public EmissaryHost()
+        {
+            // Host class isn't here yet
+            //var host = new Wasmtime.
+        }
 
     }
 }

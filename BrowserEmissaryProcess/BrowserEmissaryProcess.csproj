@@ -101,6 +101,14 @@
     <None Include="Readme.md" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Browser Logic\BrowserBaseLogic\BrowserBaseLogic.csproj">
+      <Project>{c12c3da0-e369-49ca-bcca-494183a0d1df}</Project>
+      <Name>BrowserBaseLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Browser Logic\InterBrowserMessages\InterBrowserMessages.csproj">
+      <Project>{99f6b4c3-8214-4afc-a623-c882785a2167}</Project>
+      <Name>InterBrowserMessages</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Browser Standard Common\Browser Standard Common.csproj">
       <Project>{87edf122-0967-4d4e-b4fe-73a509f197f4}</Project>
       <Name>Browser Standard Common</Name>

@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <AssemblyName>VRWorldsBrowser</AssemblyName>
+    <RootNamespace>VRWorlds.Browser</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommandLineParser" Version="2.7.82" />
+    <PackageReference Include="Grpc.Core" Version="2.28.1" />
+    <PackageReference Include="Serilog" Version="2.9.1-dev-01165" />
+    <PackageReference Include="Serilog.Sinks.File" Version="5.0.0-dev-00873" />
+    <PackageReference Include="Wasmtime" Version="0.15.0-preview1" />
+  </ItemGroup>
+
+</Project>
